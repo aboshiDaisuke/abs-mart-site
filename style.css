@@ -885,7 +885,7 @@ dd {
   padding-top: 12px;
 }
 
-/* Three across on a 6-track grid, so a short last row can sit centered */
+/* Three across on a 6-track grid; a short last row stays left-aligned */
 .works-grid-tools,
 .works-grid-games {
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -893,10 +893,6 @@ dd {
 
 .works-grid > .work-card {
   grid-column: span 2;
-}
-
-.works-grid-tools > .work-card:nth-child(7) {
-  grid-column: 3 / span 2;
 }
 
 .work-card {
@@ -1356,10 +1352,6 @@ dd {
   .works-grid-tools,
   .works-grid-games {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .works-grid-tools > .work-card:nth-child(7) {
-    grid-column: 2 / span 2;
   }
 }
 
