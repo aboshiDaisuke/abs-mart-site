@@ -14,12 +14,12 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 
 | # | ゲーム・ツール | リンク |
 |---|---|---|
-| 01 | 鮨図鑑（鮨ネタクイズゲーム） | https://sushi-zukan.pages.dev/ |
-| 02 | GRO-CHAN SKY BLASTER（シューティングゲーム） | https://grochan-sky-blaster.pages.dev/ |
-| 03 | SUNSET DRIVE（3Dカートレーシング） | https://sunset-drive.pages.dev/ |
-| 04 | 夜桜詣（3D散策ゲーム） | https://yozakura.app/ |
-| 05 | 金萬 3D（3Dビューア・非公式ファンメイド） | https://aboshidaisuke.github.io/kinman-3d/ |
-| 06 | KAMI VIBES 神様占い（生年月日と神社で占う無料占い） | https://kami-uranai-github.pages.dev/ |
+| 01 | KAMI VIBES 神様占い（生年月日と神社で占う無料占い） | https://kami-uranai-github.pages.dev/ |
+| 02 | 鮨図鑑（鮨ネタクイズゲーム） | https://sushi-zukan.pages.dev/ |
+| 03 | 金萬 3D（3Dビューア・非公式ファンメイド） | https://aboshidaisuke.github.io/kinman-3d/ |
+| 04 | GRO-CHAN SKY BLASTER（シューティングゲーム） | https://grochan-sky-blaster.pages.dev/ |
+| 05 | 夜桜詣（3D散策ゲーム） | https://yozakura.app/ |
+| 06 | SUNSET DRIVE（3Dカートレーシング） | https://sunset-drive.pages.dev/ |
 | 07 | ずんだもん動画制作キット | https://aboshidaisuke.github.io/zundamon-remotion/ |
 | 08 | こえくらべ（Gemini TTS 聴きくらべ・非公式） | https://koekurabe-app.web.app/ |
 | 09 | おみやげ配布あみだくじ（抽選） | https://aboshidaisuke.github.io/amidakuji/ |
