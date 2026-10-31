@@ -80,6 +80,9 @@ body { background: var(--paper); background-image: none; }
 .hero-smallprint span { margin-inline: 8px; color: #ffd987; }
 .santa-art { position: absolute; top: 0; right: -24px; bottom: 45px; z-index: 2; width: 57%; pointer-events: none; overflow: hidden; }
 .santa-art img { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
+.portrait-depth { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; opacity: 0; pointer-events: none; }
+.has-portrait-depth > img { opacity: 0; }
+.has-portrait-depth > .portrait-depth { opacity: 1; }
 .art-orbit { position: absolute; top: 10%; left: -1%; width: 99%; aspect-ratio: 1; border: 1px solid #89dfcb50; border-radius: 50%; background: radial-gradient(circle, #64bba34a, #78ebd011 65%, transparent 66%); }
 .art-orbit::before { content: ""; position: absolute; inset: 16px; border: 1px dashed #a7ebd844; border-radius: 50%; }
 .santa-bubble { position: absolute; top: 16px; right: -6px; z-index: 3; padding: 12px 18px; border: 2px solid #fff2cb; border-radius: 50% 50% 50% 6px; background: #fff9df; color: #cf2446; font-size: 12px; font-weight: 800; transform: rotate(9deg); box-shadow: 3px 4px 0 #006a62; }
@@ -91,12 +94,13 @@ body { background: var(--paper); background-image: none; }
 .christmas-world { --stage-height: 250px; position: relative; z-index: 5; width: 100%; margin: -8px auto 0; scroll-margin-top: calc(var(--nav-h) + 12px); }
 /* The same snow color continues from the canvas through the controls to the ribbon. */
 .christmas-world::before { content: ""; position: absolute; z-index: -1; top: 55%; bottom: 0; left: calc(50% - 50vw); width: 100vw; border-radius: 50% 50% 0 0 / 30px 30px 0 0; background: #e2f3ee; pointer-events: none; }
-.world-heading { position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; align-items: center; justify-content: space-between; width: auto; margin: 0; padding: 0; }
+.world-heading { position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 7px; width: auto; margin: 0; padding: 0; }
 .world-heading > div { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .world-kicker { display: none; font-size: 8px; color: #b5dfd8; letter-spacing: .18em; font-weight: 800; }
 .world-heading h2 { margin-top: 4px; color: #fff7e3; font-size: 12px; font-weight: 800; }
-.motion-toggle { padding: 7px 13px; min-height: 35px; border: 1px solid #bbdcd570; border-radius: 20px; background: #123749; color: #e8f4e8; font: 700 10px var(--font-body); cursor: pointer; }
-.motion-toggle:hover { background: #255b69; }
+.motion-toggle, .tilt-toggle { padding: 7px 13px; min-height: 35px; border: 1px solid #bbdcd570; border-radius: 20px; background: #123749; color: #e8f4e8; font: 700 10px var(--font-body); cursor: pointer; }
+.motion-toggle:hover, .tilt-toggle:hover { background: #255b69; }
+.tilt-toggle[aria-pressed="true"] { background: #206455; border-color: #a6e7d8; }
 .world-stage { position: relative; height: var(--stage-height); margin: 0; }
 .world-stage canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; }
 .world-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 4vw, 60px); padding-bottom: 55px; font-size: clamp(38px, 6vw, 85px); }
@@ -204,7 +208,7 @@ body { background: var(--paper); background-image: none; }
   .christmas-world { --stage-height: clamp(220px, 60vw, 280px); width: calc(100% + 32px); margin: calc(var(--stage-height) * -.7) -16px 0; }
   .world-heading { right: 0; top: 8px; }
   .world-heading h2 { margin: 0; font-size: 10px; }
-  .motion-toggle { min-height: 29px; padding: 5px 8px; font-size: 9px; }
+  .motion-toggle, .tilt-toggle { min-height: 29px; padding: 5px 8px; font-size: 9px; }
   .world-stage { margin: 0; }
   .world-controls { margin-top: -36px; padding: 0 12px 8px; }
   .world-buttons { gap: 4px; }
@@ -238,6 +242,8 @@ body { background: var(--paper); background-image: none; }
   .world-buttons button { flex-direction: column; gap: 0; min-height: 42px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .portrait-depth { display: none; }
+  .has-portrait-depth > img { opacity: 1; }
   .world-buttons button { transition: none; }
   .hero-snow { display: none; }
   .string-lights i::after { animation: none; }
