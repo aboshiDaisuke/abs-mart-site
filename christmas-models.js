@@ -223,8 +223,24 @@ export function createChristmasModels(T) {
     const shadow = new T.Mesh(new T.CircleGeometry(id === 'tree' ? 1.4 : .75, 32), new T.MeshBasicMaterial({ color: 0x4a9d95, transparent: true, opacity: .14, depthWrite: false }));
     shadow.rotation.x = -Math.PI / 2; shadow.position.y = .012; shadow.name = 'contact-shadow'; actor.add(shadow);
   }
-  const ground = cylinder(root, 0xe2f3ee, 0, -.25, 0, 10.5, 10.25, .48, 96); ground.scale.z = .43;
-  const base = cylinder(root, 0xb9ded5, 0, -.53, 0, 10.22, 10.05, .15, 96); base.scale.z = .43;
+  // Extend the snow beyond the camera's lower edge so it joins the page below.
+  // Only the curved rear edge is visible; there is no floating plinth underneath.
+  const snowfield = group(root, 'snowfield');
+  const outline = new T.Shape();
+  outline.moveTo(-18, -18);
+  outline.lineTo(18, -18);
+  outline.lineTo(18, -1.8);
+  outline.quadraticCurveTo(16, 1.2, 10, 2.2);
+  outline.quadraticCurveTo(0, 4, -10, 2.2);
+  outline.quadraticCurveTo(-16, 1.2, -18, -1.8);
+  outline.closePath();
+  const snowfieldGeometry = new T.ShapeGeometry(outline, 32);
+  snowfieldGeometry.rotateX(-Math.PI / 2);
+  // Match the CSS snow exactly, independent of the scene's exposure and lights.
+  const ground = new T.Mesh(snowfieldGeometry, new T.MeshBasicMaterial({ color: 0xe2f3ee, toneMapped: false }));
+  ground.name = 'continuous-snow'; ground.position.y = -.01; snowfield.add(ground);
+  const snowShadows = new T.Mesh(snowfieldGeometry, new T.ShadowMaterial({ color: 0x548e85, opacity: .16 }));
+  snowShadows.receiveShadow = true; snowShadows.position.y = -.005; snowfield.add(snowShadows);
   const scenery = group(root, 'scenery');
   for (const [x, z, scale] of [[-8.6, -1.4, .5], [8.6, -1.8, .68], [-7.3, -2.4, .65], [6.6, -2.5, .46]]) {
     const pine = tree(true); pine.position.set(x, 0, z); pine.scale.setScalar(scale); scenery.add(pine);
@@ -249,8 +265,7 @@ export function createChristmasModels(T) {
       actors[id].userData.basePosition = new T.Vector3(...pos);
     }
     scenery.visible = !narrow;
-    ground.scale.x = base.scale.x = narrow ? .46 : 1;
-    ground.scale.z = base.scale.z = narrow ? .47 : .43;
+    snowfield.scale.x = narrow ? .46 : 1;
   }
   layout(false);
   return { root, actors, layout, materials, geometries };

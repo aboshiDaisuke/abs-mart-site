@@ -20,7 +20,7 @@ function showFallback(error) {
 async function initWorld() {
   const [T, { createChristmasModels }] = await Promise.all([
     import('./vendor/three/three.module.min.js'),
-    import('./christmas-models.js?v=lights'),
+    import('./christmas-models.js?v=snowfield'),
   ]);
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');

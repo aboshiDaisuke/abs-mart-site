@@ -28,8 +28,7 @@ body { background: var(--paper); background-image: none; }
   background: radial-gradient(ellipse at 78% 27%, #186b7370, transparent 43%), linear-gradient(180deg, #102b40, #153d50 65%, #1b5361);
   overflow: hidden;
 }
-#hero::before { content: ""; position: absolute; inset: auto -5% -20px; width: auto; height: 205px; border: 0; border-radius: 50% 50% 0 0; background: #e2f3ee; transform: none; z-index: -1; }
-#hero::after { display: none; }
+#hero::before, #hero::after { display: none; }
 .hero-inner { position: relative; display: grid; width: min(1100px, calc(100% - var(--gutter) * 2)); }
 .winter-stars { position: absolute; inset: 0; z-index: -1; opacity: .75; background-image: radial-gradient(circle at 24px 50px, #fffdf0 0 1px, transparent 2px), radial-gradient(circle at 170px 110px, #b8f1f0 0 1.5px, transparent 2.5px), radial-gradient(circle at 68px 190px, #ffdf9b 0 1px, transparent 2px); background-size: 257px 283px, 393px 331px, 317px 249px; }
 .string-lights { position: absolute; top: calc(var(--nav-h) - 9px); left: -2%; width: 104%; z-index: 7; display: flex; justify-content: space-between; height: 35px; border-bottom: 2px solid #0a1c24; border-radius: 0 0 50% 50%; pointer-events: none; }
@@ -90,6 +89,8 @@ body { background: var(--paper); background-image: none; }
 
 /* Real, interactive geometry rendered by Three.js. */
 .christmas-world { position: relative; z-index: 5; width: 100%; margin: -8px auto 0; scroll-margin-top: calc(var(--nav-h) + 12px); }
+/* The same snow color continues from the canvas through the controls to the ribbon. */
+.christmas-world::before { content: ""; position: absolute; z-index: -1; top: 55%; bottom: 0; left: calc(50% - 50vw); width: 100vw; border-radius: 50% 50% 0 0 / 30px 30px 0 0; background: #e2f3ee; pointer-events: none; }
 .world-heading { position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; align-items: center; justify-content: space-between; width: auto; margin: 0; padding: 0; }
 .world-heading > div { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .world-kicker { display: none; font-size: 8px; color: #b5dfd8; letter-spacing: .18em; font-weight: 800; }
@@ -101,7 +102,7 @@ body { background: var(--paper); background-image: none; }
 .world-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 4vw, 60px); padding-bottom: 55px; font-size: clamp(38px, 6vw, 85px); }
 .fallback-tree { font-size: clamp(80px, 13vw, 160px); }
 .fallback-message { position: absolute; bottom: 30px; left: 0; right: 0; color: #315d57; font-size: 13px; font-weight: 700; text-align: center; }
-.world-controls { position: relative; z-index: 3; padding: 0 18px 8px; margin-top: -30px; text-align: center; }
+.world-controls { position: relative; z-index: 3; padding: 0 18px 8px; margin-top: -34px; text-align: center; }
 .world-hint { display: none; margin-bottom: 10px; font-size: 11px; color: #456f66; font-weight: 700; }
 .world-hint span { color: #cf2e4d; }
 .world-buttons { display: flex; justify-content: center; gap: 9px; }
@@ -110,7 +111,6 @@ body { background: var(--paper); background-image: none; }
 .world-buttons button.is-active { background: #e73554; color: white; border-color: #b71c3f; box-shadow: 0 3px 0 #a6253c; }
 .world-buttons button span { font-size: 17px; }
 .world-message { min-height: 20px; margin-top: 8px; color: #3c6659; font-size: 11px; }
-.snow-bank { position: absolute; bottom: -2px; left: -2%; right: -2%; height: 45px; border-radius: 50% 50% 0 0; background: #e2f3ee; z-index: 0; }
 .holiday-marquee { display: flex; justify-content: center; gap: 35px; overflow: hidden; padding: 10px 0; background: #e83956; border-block: 3px solid #fff2db; color: #fff8d7; white-space: nowrap; font: 700 12px var(--font-display); letter-spacing: .07em; }
 
 /* Gifts on a snowy shelf. */
@@ -205,8 +205,7 @@ body { background: var(--paper); background-image: none; }
   .world-heading h2 { margin: 0; font-size: 10px; }
   .motion-toggle { min-height: 29px; padding: 5px 8px; font-size: 9px; }
   .world-stage { height: clamp(220px, 60vw, 280px); margin: 0; }
-  #hero::before { display: block; height: 165px; }
-  .world-controls { margin-top: -24px; padding: 0 12px 8px; }
+  .world-controls { margin-top: -36px; padding: 0 12px 8px; }
   .world-buttons { gap: 4px; }
   .world-buttons button { flex: 1; max-width: 92px; gap: 3px; min-height: 36px; padding: 5px 3px; border-radius: 9px; font-size: 8px; }
   .world-buttons button span { font-size: 14px; }
