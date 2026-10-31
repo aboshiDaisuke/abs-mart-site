@@ -1,0 +1,340 @@
+/* Christmas 2026 — warm paper, evergreen, cranberry, and a little gold. */
+:root {
+  --paper: #faf6ed;
+  --paper-deep: #f0e8d9;
+  --bg-clean: #faf6ed;
+  --surface: #fffcf5;
+  --ink: #173f35;
+  --text: #27463b;
+  --muted: #64695e;
+  --faint: #8e8b77;
+  --pink: #b52d3d;
+  --pink-hot: #a32334;
+  --pink-soft: #f4e5de;
+  --cobalt: #28614d;
+  --cobalt-deep: #173f35;
+  --gold: #d9b56e;
+  --grape: #a32334;
+  --line: #dbd4c4;
+  --grad-gal: linear-gradient(110deg, #b52d3d, #a32334);
+  --nav-h: 92px;
+  --font-display: "Rowdies", "M PLUS Rounded 1c", sans-serif;
+}
+
+body {
+  background: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23977d50' opacity='.045' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  background-size: 180px;
+}
+
+:focus-visible { outline-color: #ab7331; }
+[hidden] { display: none !important; }
+
+/* A quiet masthead leaves room for the illustration. */
+#navbar, #navbar.is-scrolled {
+  background: rgba(250, 246, 237, .96);
+  border-bottom: 1px solid var(--line);
+  box-shadow: none;
+}
+.nav-inner { width: min(1360px, calc(100% - var(--gutter) * 2)); }
+.logo-img { width: 181px; height: auto; }
+.logo-sub {
+  margin: 1px 0 0 8px;
+  font: 700 8px/1.4 var(--font-body);
+  letter-spacing: .18em;
+  color: var(--muted);
+}
+.nav-season { font-size: 10px; font-weight: 700; letter-spacing: .16em; color: #6e7667; }
+.nav-actions { gap: 22px; }
+.nav-link, .nav-link:first-child, .nav-link:nth-child(2) {
+  padding: 10px 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  box-shadow: none;
+  font-size: .82rem;
+}
+.nav-link:hover, .nav-link:focus-visible { color: var(--pink); box-shadow: none; transform: none; }
+.nav-link svg { width: 16px; height: 16px; }
+
+/* A Christmas greeting card with a full-bleed illustrated half. */
+#hero { padding: calc(var(--nav-h) + 25px) var(--gutter) 0; background: none; }
+#hero::before, #hero::after { display: none; }
+.holiday-heading {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  color: #777663;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .18em;
+}
+.hero-visual {
+  grid-template-columns: 44% 56%;
+  padding: 0;
+  border: 1px solid #d4cab5;
+  border-radius: 3px;
+  background: var(--surface);
+  box-shadow: 0 12px 32px #173f350a;
+}
+.hero-copy {
+  grid-area: auto;
+  align-self: stretch;
+  justify-self: stretch;
+  width: auto;
+  margin: 0;
+  padding: clamp(28px, 3.8vw, 56px) clamp(24px, 3.3vw, 48px) 30px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.hero-copy::before { display: none; }
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--pink-hot);
+}
+.christmas-star { font-size: 21px; line-height: 1; color: #a67d3b; }
+.hero-greeting {
+  margin-top: 25px;
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(52px, 5.2vw, 79px);
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.055em;
+}
+.hero-greeting em { display: inline-block; color: var(--pink); font-weight: 400; }
+.hero-title {
+  margin-top: 29px;
+  color: var(--ink);
+  font-size: clamp(22px, 2.05vw, 31px);
+  font-weight: 800;
+  line-height: 1.7;
+  letter-spacing: -.035em;
+  text-wrap: initial;
+}
+.hero-title span { color: var(--pink); }
+.hero-lead {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: clamp(11px, .92vw, 14px);
+  font-weight: 500;
+  line-height: 2;
+}
+.hero-actions { margin-top: 26px; }
+.btn-primary {
+  gap: 12px;
+  min-height: 53px;
+  padding: 0 22px;
+  border: 1px solid var(--pink-hot);
+  border-radius: 3px;
+  background: var(--pink);
+  font-size: 13px;
+  box-shadow: 0 4px 0 #812332;
+}
+.btn-primary:hover, .btn-primary:focus-visible {
+  transform: translateY(-2px);
+  background: var(--pink-hot);
+  box-shadow: 0 6px 0 #812332;
+}
+.btn-primary svg { width: 18px; height: 18px; }
+.hero-badges { margin-top: 17px; gap: 12px; }
+.hero-badges li { padding: 0; border: 0; border-radius: 0; background: none; color: var(--muted); font-size: 10px; font-weight: 500; }
+.hero-badges li::before { color: var(--cobalt); }
+.hero-signoff { display: flex; align-items: center; gap: 12px; margin-top: 29px; color: #8a7b60; font: italic 12px Georgia, serif; }
+.signoff-line { flex: 1; height: 1px; background: #dfd6c4; }
+.hero-photo { grid-area: auto; min-width: 0; border-radius: 0 2px 2px 0; isolation: isolate; }
+.hero-photo picture { position: absolute; inset: 0; display: block; }
+.hero-visual .hero-image { width: 100%; height: 100%; min-height: 0; border-radius: 0; object-fit: cover; object-position: 55% center; }
+.christmas-seal {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 93px;
+  height: 93px;
+  border: 1px solid #ecd197;
+  outline: 4px solid #173f35;
+  border-radius: 50%;
+  background: #173f35;
+  color: #f6e5bb;
+  transform: rotate(12deg);
+}
+.christmas-seal span { font-size: 8px; letter-spacing: .08em; line-height: 1.8; }
+.christmas-seal b { font: 36px/1 Georgia, serif; }
+.photo-caption { position: absolute; inset: auto 0 0; z-index: 3; display: flex; justify-content: space-between; padding: 32px 22px 16px; background: linear-gradient(transparent, #122c27b3); color: #fff9e9; font: italic 15px Georgia, serif; }
+.snow-toggle { position: absolute; right: 14px; bottom: 53px; z-index: 4; min-height: 32px; padding: 5px 10px; border: 1px solid #ffffff66; border-radius: 3px; background: #173f35e6; color: #fffaf0; font: 500 10px var(--font-body); cursor: pointer; }
+.snow-toggle:hover { background: #173f35; }
+.holiday-note { display: flex; justify-content: center; align-items: center; gap: 25px; min-height: 88px; color: #747863; text-align: center; }
+.holiday-note > span { color: #a67d3b; font-size: 25px; }
+.holiday-note p { font-size: 12px; line-height: 1.9; }
+.holiday-note p span { margin-left: 16px; }
+.christmas-ribbon { display: flex; align-items: center; justify-content: center; gap: 40px; overflow: hidden; padding: 14px 0; border-block: 1px solid #9f2536; background: var(--pink); color: #fff2d4; white-space: nowrap; font: 700 10px var(--font-body); letter-spacing: .16em; }
+
+/* Soft, pausable snow is restricted to the artwork. */
+.christmas-snow { position: absolute; inset: 0; z-index: 2; overflow: hidden; pointer-events: none; }
+.christmas-snow::before, .christmas-snow::after { content: ""; position: absolute; inset: -180px 0 0; opacity: 0; background-image: radial-gradient(circle at 25px 30px, #fff9 1px, transparent 2px), radial-gradient(circle at 110px 110px, #fffc 1.8px, transparent 3px), radial-gradient(circle at 160px 60px, #fff8 1px, transparent 2px); background-size: 180px 180px; animation: christmas-snowfall 12s linear infinite; animation-play-state: paused; }
+.christmas-snow::after { background-size: 260px 260px; inset: -260px 0 0; animation-name: christmas-snowfall-near; animation-duration: 18s; }
+.christmas-snow.is-snowing::before, .christmas-snow.is-snowing::after { opacity: .7; animation-play-state: running; }
+@keyframes christmas-snowfall { to { transform: translateY(180px); } }
+@keyframes christmas-snowfall-near { to { transform: translateY(260px); } }
+
+/* The collection is arranged like gifts on an evergreen shop shelf. */
+#works { padding: 66px 0 72px; background: #173f35; color: #fff9e9; }
+#works .section-heading { display: flex; align-items: flex-start; gap: 15px; padding-bottom: 28px; margin-bottom: 34px; border-bottom: 1px solid #ffffff30; }
+#works .section-heading .eyebrow { color: #dcc291; font-size: 10px; letter-spacing: .13em; }
+#works .section-heading .eyebrow span { padding: 0 8px; }
+.section-title { font-size: clamp(25px, 2.8vw, 38px); line-height: 1.5; letter-spacing: -.03em; }
+#works .section-title { color: #fff9e9; }
+#works .section-title::after { display: none; }
+.work-group-heading { align-items: center; margin-bottom: 22px; gap: 18px; }
+.work-group-label, .work-group + .work-group .work-group-label { padding: 4px 12px; border: 1px solid #d9b56e80; border-radius: 2px; background: none; color: #ead2a0; box-shadow: none; font-family: Georgia, serif; font-size: 13px; font-style: italic; }
+.work-group-title { color: #fff9e9; font-size: 16px; font-weight: 500; }
+.work-group + .work-group { margin-top: 42px; padding-top: 37px; border-top: 1px solid #ffffff30; }
+.works-grid { gap: 25px; padding-top: 0; }
+.work-card, .work-card:nth-child(n), .js .work-card:nth-child(n)[data-reveal].is-revealed {
+  padding: 11px 11px 8px;
+  border: 1px solid #dfd6c2;
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 6px 0 #0b2e26;
+  transform: none;
+}
+.work-card::before, .work-card:nth-child(even)::before { display: none; }
+.work-card:hover, .js .work-card[data-reveal].is-revealed:hover { transform: translateY(-5px); box-shadow: 0 11px 0 #0b2e26; }
+.work-thumb { border: 0; border-radius: 2px; background: #e9e4d5; }
+.work-icon { width: 43px; height: 43px; margin-top: -20px; border-width: 2px; box-shadow: 0 2px 5px #173f3520; }
+.work-cat { color: #947039; font: italic 12px Georgia, serif; }
+.work-title { color: var(--ink); font-size: 1.06rem; }
+.work-desc { color: #63695e; font-size: .84rem; line-height: 1.85; }
+.work-card .work-open { color: var(--ink); border-color: #d4d8c9; border-radius: 2px; background: #eff1e7; box-shadow: none; }
+.work-card:hover .work-open { background: #e4eadc; }
+.work-new { background: #b52d3d; color: white; border: 1px solid #fff1d4; box-shadow: 2px 2px 0 #173f35; font: 700 11px var(--font-body); }
+
+/* Three little reasons to make yourself at home. */
+#points { padding: 65px 0 70px; border: 0; background: none; }
+#points .section-heading { gap: 12px; margin-bottom: 32px; }
+#points .eyebrow { color: #997338; }
+.points-grid { gap: 0; }
+.point-card, .point-card:nth-child(n), .js .point-card:nth-child(n)[data-reveal].is-revealed { min-height: 0; padding: 12px 30px; border: 0; border-radius: 0; background: none; box-shadow: none; transform: none; }
+.point-card + .point-card { border-left: 1px solid #dcd3c2; }
+.point-card::after, .point-card:nth-child(n)::after { display: none; }
+.point-card:hover, .js .point-card[data-reveal].is-revealed:hover { transform: none; box-shadow: none; }
+.point-icon, .point-card:nth-child(n) .point-icon { width: 46px; height: 46px; border: 1px solid #d7cbb4; border-radius: 50%; background: none; color: #a12839; box-shadow: none; transform: none; }
+.point-icon svg { width: 23px; height: 23px; }
+.point-no { margin-top: 15px; color: #947039; font: italic 12px Georgia, serif; }
+.point-title { margin-top: 8px; font-size: 18px; }
+.point-desc { font-size: 12px; line-height: 1.9; }
+
+#footer { padding-top: 30px; padding-bottom: 25px; background: #eae5d7; color: var(--ink); border-top: 1px solid #d5cbb7; }
+#footer::before { height: 5px; border: 0; background: repeating-linear-gradient(120deg, #b52d3d 0 12px, #faf6ed 12px 24px, #28614d 24px 36px, #faf6ed 36px 48px); }
+.footer-inner { margin-top: 0; }
+#footer .logo-sub { color: #686d5e; }
+.footer-nav a { color: var(--ink); font-size: 12px; }
+.footer-nav a:hover, .footer-nav a:focus-visible { color: var(--pink); }
+.footer-copy { margin-top: 16px; padding-top: 20px; border-top: 1px solid #d5cbb7; color: #696d5d; font: italic 13px Georgia, serif; }
+.footer-copy span { margin-left: 20px; font: 10px var(--font-body); }
+.to-top { width: 48px; height: 48px; border: 1px solid #ead2a0; border-radius: 3px; background: #a32334; box-shadow: 0 3px 12px #102f2733; font: 700 9px var(--font-body); }
+.to-top:hover, .to-top:focus-visible { box-shadow: 0 4px 16px #102f2744; }
+
+@media (min-width: 1600px) { .hero-photo { min-height: 650px; } }
+@media (max-width: 1100px) and (min-width: 901px) {
+  .hero-copy { padding-inline: 25px; }
+  .hero-greeting { font-size: 53px; }
+  .hero-title { font-size: 22px; }
+  .desktop-break { display: none; }
+  .hero-lead { font-size: 12px; }
+  .hero-badges { gap: 6px; }
+}
+@media (max-width: 960px) {
+  .nav-season { display: none; }
+  .points-grid { max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .point-card, .point-card:nth-child(n) { padding-inline: 20px; }
+}
+@media (max-width: 900px) {
+  .hero-visual { grid-template-columns: 1fr; }
+  .hero-copy { padding: 35px 32px 30px; }
+  .hero-greeting { font-size: clamp(58px, 10vw, 78px); }
+  .hero-greeting br { display: none; }
+  .hero-greeting em { margin-left: .12em; }
+  .hero-title { font-size: 27px; }
+  .hero-lead { font-size: 13px; }
+  .hero-photo { aspect-ratio: 3 / 2; border-radius: 0; }
+  .hero-signoff { max-width: 430px; }
+  .holiday-note p span { display: block; margin-left: 0; }
+}
+@media (max-width: 760px) {
+  :root { --nav-h: 76px; --gutter: 22px; }
+  .logo-img { width: 152px; }
+  .nav-actions { gap: 17px; }
+  .nav-link, .nav-link:first-child, .nav-link:nth-child(2) { font-size: 12px; }
+  #hero { padding-top: calc(var(--nav-h) + 18px); }
+  .holiday-heading { font-size: 7px; letter-spacing: .1em; padding-bottom: 12px; }
+  .hero-copy { padding: 28px 25px; }
+  .hero-greeting { margin-top: 20px; font-size: clamp(42px, 8.5vw, 62px); }
+  .hero-title { margin-top: 23px; font-size: 25px; line-height: 1.65; }
+  .hero-lead { font-size: 12px; }
+  .hero-actions { margin-top: 21px; }
+  .hero-signoff { margin-top: 25px; }
+  .hero-photo { aspect-ratio: 1.25; }
+  .hero-visual .hero-image { object-position: 53% center; }
+  .christmas-seal { top: 14px; right: 14px; width: 72px; height: 72px; }
+  .christmas-seal b { font-size: 29px; }
+  .christmas-seal span { font-size: 6px; }
+  .photo-caption { padding-inline: 16px; font-size: 13px; }
+  .holiday-note { gap: 14px; min-height: 94px; }
+  .holiday-note p { font-size: 10px; }
+  .christmas-ribbon { justify-content: flex-start; gap: 25px; padding-left: 22px; font-size: 8px; }
+  #works { padding: 42px 0 48px; }
+  #works .section-heading { gap: 12px; padding-bottom: 22px; margin-bottom: 25px; }
+  #works .section-heading .eyebrow { font-size: 8px; letter-spacing: .08em; }
+  .section-title { padding: 0; font-size: 24px; }
+  .work-group-heading { display: flex; flex-wrap: wrap; gap: 9px 13px; }
+  .work-group-title { margin: 0; font-size: 13px; }
+  .work-group-label { font-size: 12px; }
+  .works-grid { gap: 18px; }
+  .work-card-link { column-gap: 12px; padding-bottom: 0; }
+  .work-card .work-title { font-size: 14px; line-height: 1.5; }
+  .work-cat { font-size: 11px; }
+  .work-desc { margin-top: 12px; font-size: 12px; line-height: 1.8; }
+  .work-open { min-height: 34px; margin-top: 12px; font-size: 11px; }
+  .work-group + .work-group { margin-top: 32px; padding-top: 28px; }
+  #points { padding: 43px 0; }
+  .points-grid { grid-template-columns: 1fr; }
+  .point-card, .point-card:nth-child(n) { padding: 23px 6px; border: 0; }
+  .point-card + .point-card { border-top: 1px solid #dcd3c2; }
+  .point-icon { float: left; margin-right: 18px; }
+  .point-no { margin-top: 0; }
+  .point-title { margin-top: 5px; }
+  .point-desc { clear: both; padding-top: 12px; margin-top: 0; }
+  #points .section-heading { margin-bottom: 10px; }
+  .footer-inner { gap: 22px; }
+  .footer-copy { margin-top: 0; width: 100%; }
+  .footer-copy span { display: block; margin: 9px 0 0; }
+}
+@media (max-width: 520px) {
+  .hero-visual { padding: 0; border-radius: 3px; }
+  .hero-greeting br { display: block; }
+  .hero-greeting { font-size: clamp(55px, 13.5vw, 68px); }
+  .hero-greeting em { margin-left: 0; }
+  .hero-title { font-size: clamp(20px, 5.6vw, 25px); }
+  .hero-actions .btn { flex: none; width: 100%; padding-inline: 10px; font-size: 12px; }
+  .hero-copy { padding-inline: 23px; }
+  .desktop-break { display: none; }
+  .holiday-heading span:last-child { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .christmas-snow::before, .christmas-snow::after { animation: none; opacity: 0; }
+  .snow-toggle { display: none; }
+}

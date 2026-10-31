@@ -39,40 +39,27 @@ if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-revealed"));
 }
 
+// Decorative snowfall respects reduced motion, data saving, and a manual pause.
+const snow = document.querySelector(".christmas-snow");
+const snowToggle = document.querySelector(".snow-toggle");
+const dataConnection = navigator.connection;
+let snowPaused = false;
 
-// Tiny 3D ghosts: drag to turn, tap to spin once.
-document.querySelectorAll(".hw-ghost").forEach((ghost) => {
-  let downX = 0;
-  let downY = 0;
-  let spinning = false;
+if (snow && snowToggle) {
+  const updateSnow = () => {
+    const available = !prefersReducedMotion.matches && !dataConnection?.saveData;
+    const active = available && !snowPaused;
+    snow.classList.toggle("is-snowing", active);
+    snowToggle.hidden = !available;
+    snowToggle.setAttribute("aria-pressed", String(active));
+    snowToggle.querySelector(".snow-toggle-label").textContent = active ? "雪を止める" : "雪を降らせる";
+  };
 
-  ghost.addEventListener("pointerdown", (event) => {
-    downX = event.clientX;
-    downY = event.clientY;
+  snowToggle.addEventListener("click", () => {
+    snowPaused = !snowPaused;
+    updateSnow();
   });
-
-  ghost.addEventListener("click", (event) => {
-    const moved = Math.hypot(event.clientX - downX, event.clientY - downY);
-    if (moved > 6 || spinning || !ghost.loaded || prefersReducedMotion.matches) return;
-
-    spinning = true;
-    const orbit = ghost.getCameraOrbit();
-    const start = orbit.theta;
-    const duration = 900;
-    const startTime = performance.now();
-
-    const step = (now) => {
-      const t = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - t, 3);
-      ghost.cameraOrbit = `${start + eased * Math.PI * 2}rad ${orbit.phi}rad ${orbit.radius}m`;
-      ghost.jumpCameraToGoal();
-      if (t < 1) {
-        requestAnimationFrame(step);
-      } else {
-        spinning = false;
-      }
-    };
-
-    requestAnimationFrame(step);
-  });
-});
+  prefersReducedMotion.addEventListener("change", updateSnow);
+  dataConnection?.addEventListener("change", updateSnow);
+  updateSnow();
+}
