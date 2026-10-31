@@ -1,5 +1,8 @@
+import { createHolidayProps } from './christmas-props.js?v=craft-v2';
+
 // Original toy models built entirely from geometry; no model service or remote assets.
 export function createChristmasModels(T) {
+  const props = createHolidayProps(T);
   const palette = {
     red: 0xeb3151, darkRed: 0xb71f3b, cream: 0xfff9e5, snow: 0xf2fffc,
     green: 0x087b57, mint: 0x6ce3b2, gold: 0xffcf53, black: 0x172d37,
@@ -55,24 +58,7 @@ export function createChristmasModels(T) {
     }
   };
 
-  function gift(color = 'red', ribbon = 'gold', scale = 1) {
-    const root = group(null, 'gift');
-    box(root, color, 0, .42, 0, .92, .8, .85);
-    box(root, ribbon, 0, .43, .001, .14, .82, .86);
-    box(root, ribbon, 0, .43, 0, .93, .82, .14);
-    const lid = group(root, 'gift-lid'); lid.position.y = .88;
-    box(lid, color, 0, 0, 0, 1.02, .17, .94);
-    box(lid, ribbon, 0, .006, 0, .15, .19, .96);
-    box(lid, ribbon, 0, .006, 0, 1.04, .19, .14);
-    for (const side of [-1, 1]) {
-      const bow = torus(lid, ribbon, side * .16, .22, 0, .18, .045);
-      bow.scale.set(1.2, .7, 1); bow.rotation.z = side * .45;
-    }
-    ball(lid, ribbon, 0, .15, .02, .09);
-    const surprise = ball(root, 'gold', 0, 1, 0, .19, .19, .19, true); surprise.visible = false;
-    root.userData.lid = lid; root.userData.surprise = surprise;
-    root.scale.setScalar(scale); return root;
-  }
+  const gift = (...args) => props.gift(...args);
 
   function santa() {
     const root = group(null, 'santa');
@@ -170,47 +156,7 @@ export function createChristmasModels(T) {
     root.userData.head = head; return root;
   }
 
-  const starShape = new T.Shape();
-  for (let i = 0; i < 10; i++) {
-    const angle = Math.PI / 2 + i * Math.PI / 5;
-    const r = i % 2 ? .21 : .48;
-    const x = Math.cos(angle) * r, y = Math.sin(angle) * r;
-    if (i === 0) starShape.moveTo(x, y); else starShape.lineTo(x, y);
-  }
-  starShape.closePath();
-  const starGeo = new T.ExtrudeGeometry(starShape, { depth: .12, bevelEnabled: true, bevelSegments: 2, steps: 1, bevelSize: .035, bevelThickness: .035 });
-
-  function tree(small = false) {
-    const root = group(null, small ? 'little-tree' : 'tree');
-    cylinder(root, 'brown', 0, .3, 0, .19, .24, .6);
-    const tiers = [[1.3, 1.7, 1.2], [1.05, 1.6, 2.14], [.76, 1.5, 3.04]];
-    for (const [radius, height, y] of tiers) {
-      mesh(root, new T.ConeGeometry(radius, height, 40), 'green', 0, y, 0);
-      const rim = torus(root, 'snow', 0, y - height / 2 + .05, 0, radius * .97, .05); rim.rotation.x = Math.PI / 2;
-    }
-    if (!small) {
-      const star = mesh(root, starGeo, 'gold', 0, 4.02, 0, true); root.userData.star = star;
-      const cablePoints = [];
-      const bulbs = [];
-      for (let i = 0; i <= 150; i++) {
-        const f = i / 150, angle = f * Math.PI * 9;
-        const y = .7 + f * 2.88, radius = (1 - f) * 1.06 + .15;
-        cablePoints.push(new T.Vector3(Math.cos(angle) * radius, y, Math.sin(angle) * radius));
-        if (i % 5 === 0) bulbs.push(ball(root, ['gold', 'red', 'mint'][i % 3], Math.cos(angle) * (radius + .05), y, Math.sin(angle) * (radius + .05), .055, .055, .055, true));
-      }
-      mesh(root, new T.TubeGeometry(new T.CatmullRomCurve3(cablePoints), 150, .018, 5, false), 'gold');
-      for (let level = 0; level < 3; level++) {
-        for (let j = 0; j < 7 - level; j++) {
-          const a = j / (7 - level) * Math.PI * 2 + level * .7;
-          const r = 1.06 - level * .3;
-          const ornament = ball(root, ['red', 'gold', 'mint', 'cream'][(j + level) % 4], Math.cos(a) * r, .8 + level * .94, Math.sin(a) * r, .11 - level * .015);
-          cylinder(root, 'gold', ornament.position.x, ornament.position.y + .12, ornament.position.z, .035, .035, .05, 8);
-        }
-      }
-      root.userData.bulbs = bulbs;
-    }
-    return root;
-  }
+  const tree = (small = false) => props.tree(small);
 
   const root = group(null, 'christmas-toyland');
   const actors = { santa: santa(), reindeer: reindeer(), tree: tree(), snowman: snowman(), gift: gift('red', 'gold', 1.16) };
@@ -268,5 +214,5 @@ export function createChristmasModels(T) {
     snowfield.scale.x = narrow ? .46 : 1;
   }
   layout(false);
-  return { root, actors, layout, materials, geometries };
+  return { root, actors, layout, materials, geometries, textures: props.textures, environment: props.environment };
 }

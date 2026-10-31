@@ -20,7 +20,7 @@ function showFallback(error) {
 async function initWorld() {
   const [T, { createChristmasModels }] = await Promise.all([
     import('./vendor/three/three.module.min.js'),
-    import('./christmas-models.js?v=gift-spacing'),
+    import('./christmas-models.js?v=craft-v2'),
   ]);
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
@@ -29,7 +29,7 @@ async function initWorld() {
   renderer.setClearColor(0x000000, 0);
   renderer.outputColorSpace = T.SRGBColorSpace;
   renderer.toneMapping = T.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.24;
+  renderer.toneMappingExposure = 1.15;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = T.PCFSoftShadowMap;
   stage.append(canvas);
@@ -38,8 +38,8 @@ async function initWorld() {
   const camera = new T.OrthographicCamera(-11, 11, 3.5, -3.5, .1, 80);
   camera.position.set(0, 7.5, 17);
   camera.lookAt(0, 1.9, 0);
-  scene.add(new T.HemisphereLight(0xc9f1ff, 0x7fafa1, 2.5));
-  const key = new T.DirectionalLight(0xffe7c2, 3.5);
+  scene.add(new T.HemisphereLight(0xc9f1ff, 0x7fafa1, 1.45));
+  const key = new T.DirectionalLight(0xffe7c2, 2.8);
   key.position.set(-5, 10, 7); key.castShadow = true;
   key.shadow.mapSize.set(1024, 1024);
   Object.assign(key.shadow.camera, { left: -11, right: 11, top: 7, bottom: -7, near: .5, far: 35 });
@@ -50,6 +50,8 @@ async function initWorld() {
 
   const models = createChristmasModels(T);
   scene.add(models.root);
+  scene.environment = models.environment();
+  scene.environmentIntensity = 1.1;
   const { actors } = models;
   const treeLight = new T.PointLight(0xffd369, 7, 7); treeLight.position.set(.45, 3.8, .4); scene.add(treeLight);
   const raycaster = new T.Raycaster();
@@ -82,7 +84,7 @@ async function initWorld() {
   const glowGeometry = new T.BufferGeometry();
   glowGeometry.setAttribute('position', new T.BufferAttribute(glowPositions, 3));
   glowGeometry.setAttribute('color', new T.BufferAttribute(glowColors, 3));
-  const glowMaterial = new T.PointsMaterial({ map: glowTexture, vertexColors: true, size: 32, sizeAttenuation: false, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: .9, toneMapped: false });
+  const glowMaterial = new T.PointsMaterial({ map: glowTexture, vertexColors: true, size: 24, sizeAttenuation: false, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: .9, toneMapped: false });
   const bulbGlows = new T.Points(glowGeometry, glowMaterial);
   bulbGlows.name = 'tree-light-halos'; bulbGlows.raycast = () => {};
   actors.tree.add(bulbGlows);
@@ -117,7 +119,7 @@ async function initWorld() {
     const nextNarrow = width / height < 2.4;
     narrow = nextNarrow;
     models.layout(narrow);
-    glowMaterial.size = narrow ? 22 : 32;
+    glowMaterial.size = narrow ? 17 : 24;
     treeLight.position.set(narrow ? .1 : .2, 3.3, narrow ? -.3 : .4);
     const viewHeight = narrow
       ? Math.max(6.4, 10.4 / (width / height))
@@ -159,8 +161,10 @@ async function initWorld() {
     giftProgress = animation ? T.MathUtils.lerp(giftProgress, target, .13) : target;
     actors.gift.userData.lid.position.y = .88 + giftProgress * .67;
     actors.gift.userData.lid.rotation.z = giftProgress * -.2;
+    actors.gift.userData.lid.rotation.x = giftProgress * -.1;
     actors.gift.userData.surprise.visible = giftProgress > .25;
     actors.gift.userData.surprise.position.y = 1.15 + (animation ? Math.sin(t * 3) * .07 : 0);
+    actors.gift.userData.surprise.rotation.y = animation ? t * .65 : 0;
     for (let i = 0; i < snowCount; i++) {
       const seed = snowSeeds[i];
       snowPositions[i * 3] = seed.x * (narrow ? .43 : 1) + Math.sin(t * .3 + i) * .12;
@@ -265,9 +269,11 @@ async function initWorld() {
     scene.traverse(object => {
       if (object.geometry) geometries.add(object.geometry);
       if (object.material) for (const material of [].concat(object.material)) materials.add(material);
+      if (object.isInstancedMesh) object.dispose();
     });
     for (const geometry of geometries) geometry.dispose();
     for (const material of materials) material.dispose();
+    for (const texture of models.textures) texture.dispose();
     snowTexture.dispose(); glowTexture.dispose(); renderer.dispose();
   }
   window.addEventListener('pagehide', dispose);
