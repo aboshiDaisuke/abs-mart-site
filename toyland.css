@@ -132,6 +132,7 @@ body { background: var(--paper); background-image: none; }
 .work-card:nth-child(even)::before { background: repeating-linear-gradient(125deg, #248d71 0 6px, #fff5dc 6px 12px); transform: translateX(-50%) rotate(5deg); }
 .work-card:hover, .js .work-card[data-reveal].is-revealed:hover { transform: translateY(-5px) rotate(-1deg); box-shadow: 5px 10px 0 #87c7a9; }
 .work-thumb { border: 0; border-radius: 9px; background: #d9eee1; }
+.work-thumb img, .work-card:hover .work-thumb img { transform: none; transition: none; }
 .work-icon { border-width: 2px; box-shadow: 2px 3px 0 #b5d3be; }
 .work-cat { color: #a22843; font-family: var(--font-display); font-size: 11px; }
 .work-title { color: #204d40; font-size: 17px; }
