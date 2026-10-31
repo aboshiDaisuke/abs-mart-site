@@ -11,8 +11,8 @@ export function createChristmasModels(T) {
     const hex = palette[color] ?? color;
     const key = `${hex}-${glow}`;
     if (!materials.has(key)) materials.set(key, new T.MeshStandardMaterial({
-      color: hex, roughness: glow ? .3 : .66, metalness: color === 'gold' ? .28 : .02,
-      emissive: glow ? hex : 0x000000, emissiveIntensity: glow ? .65 : 0,
+      color: hex, roughness: glow ? .16 : color === 'gold' ? .28 : .66, metalness: color === 'gold' ? .42 : .02,
+      emissive: glow ? hex : 0x000000, emissiveIntensity: glow ? 2.5 : 0,
     }));
     return materials.get(key);
   };

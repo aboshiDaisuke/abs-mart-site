@@ -38,3 +38,40 @@ if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
 } else {
   revealEls.forEach((el) => el.classList.add("is-revealed"));
 }
+
+// One control for the snowfall, garland, and 3D toys, including WebGL fallback.
+const holidayHero = document.getElementById('hero');
+const holidayToggle = document.querySelector('.motion-toggle');
+const holidayConnection = navigator.connection;
+let holidayPaused = false;
+let holidayVisible = true;
+
+if (holidayHero && holidayToggle) {
+  const updateHolidayMotion = () => {
+    const available = !prefersReducedMotion.matches && !holidayConnection?.saveData;
+    const active = available && !holidayPaused && holidayVisible && !document.hidden;
+    holidayHero.dataset.holidayPaused = String(holidayPaused);
+    holidayHero.classList.toggle('holiday-running', active);
+    holidayToggle.hidden = !available;
+    holidayToggle.setAttribute('aria-pressed', String(holidayPaused));
+    holidayToggle.innerHTML = holidayPaused
+      ? '<span aria-hidden="true">▶</span> 動かす'
+      : '<span aria-hidden="true">Ⅱ</span> 雪・動きを止める';
+    window.dispatchEvent(new Event('holiday-motion-change'));
+  };
+  holidayToggle.addEventListener('click', () => {
+    holidayPaused = !holidayPaused;
+    updateHolidayMotion();
+  });
+  prefersReducedMotion.addEventListener('change', updateHolidayMotion);
+  holidayConnection?.addEventListener('change', updateHolidayMotion);
+  document.addEventListener('visibilitychange', updateHolidayMotion);
+  if ('IntersectionObserver' in window) {
+    const holidayObserver = new IntersectionObserver(([entry]) => {
+      holidayVisible = entry.isIntersecting;
+      updateHolidayMotion();
+    });
+    holidayObserver.observe(holidayHero);
+  }
+  updateHolidayMotion();
+}

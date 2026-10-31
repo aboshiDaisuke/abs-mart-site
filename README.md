@@ -32,27 +32,45 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 
 新しい候補は `christmas-toyland-2026` ブランチです。夜空、キャンディカラーの見出し、アニメ塗りのサンタ衣装のぐろちゃんと、Three.jsの雪の広場を組み合わせています。
 
-トップは、ぐろちゃんを大きく配置した背景と、手前の3Dの地面・サンタたちを同じビジュアル内に重ねています。イラスト専用の固定高さをなくし、スマホの説明とボタンも内容に沿って並べ、作品一覧までの余白を詰めています。
+トップは、ぐろちゃんを大きく配置した背景と、手前の3Dの地面・サンタたちを同じビジュアル内に重ねています。ぐろちゃんは顔と輪郭がくっきりしたバストアップに描き直し、手がフレームに入らない構図にしています。イラスト専用の固定高さをなくし、スマホの説明とボタンも内容に沿って並べ、作品一覧までの余白を詰めています。
 
 - **新しい3D版**：`/`（ローカルでは http://127.0.0.1:8000/ ）
 - **最初の候補**：`/candidate-a/`（元の `christmas-2026` ブランチも保持）
 - **モデル**：サンタ、トナカイ、雪だるま、オーナメントと電飾付きツリー、リボン付きプレゼント。`christmas-models.js` で形状から制作しています。
 - **操作**：モデルをタップ、または下のボタンをクリック／キーボード操作。サンタの手振り、トナカイの首振り、雪だるまのリアクション、ツリーの星と照明、プレゼントの開閉を楽しめます。
-- **動作制御**：停止・再開ボタン、動きを減らす設定、データセーバー、画面外・バックグラウンドでのアニメーション停止に対応。WebGLが使えない場合は静的な広場と通常の作品一覧を表示します。
+- **電飾と雪**：上部の電球に白い光の芯・色付きのにじみ・きらめきを加え、3Dツリーにも加算合成の光を追加。背景全体を3層の雪が流れ、広場にも3Dの雪が降ります。
+- **動作制御**：雪・電飾・3Dをまとめて停止・再開。動きを減らす設定、データセーバー、画面外・バックグラウンドでのアニメーション停止に対応。WebGLが使えない場合は静的な広場と通常の作品一覧を表示し、背景の雪と停止操作は引き続き使えます。
 - **画面サイズ**：スマホではモデルの配置も変更し、ツリーの後ろにほかの仲間が隠れないようにしています。
 - **依存**：[Three.js](https://threejs.org/) 0.180.0を `vendor/three/` に同梱。3D表示のための外部CDNアクセスは不要です。MITライセンスを同梱しています。
 - 作品13件の内容・リンクと既存の転送ページは維持しています。
 
 ### イラストと候補の保存
 
-組み込みの imagegen ツールで、既存キャラクターを参照し、ポーズと塗り方を変えたアニメ塗りの透過立ち絵を制作しました。
+組み込みの imagegen ツールで、既存キャラクターを参照したアニメ塗りの透過イラストを制作しました。
 
-- 新イラスト：`santa_anime_480.webp` / `santa_anime_800.webp`（透過WebP）。原本：`_src/christmas/santa_anime.png`（git管理対象外）。
+- 現行のバストアップ：`santa_bust_full.webp`（1254×1254px・透過・可逆圧縮）と `santa_bust_640.webp` / `santa_bust_960.webp`。原本：`_src/christmas/santa_bust_v2.png`（git管理対象外）。表示枠の幅だけでなく `object-fit: cover` による拡大を考慮して画像を選び、画像自体へのぼかし・影フィルターも外しています。
+- 前の全身イラスト：`santa_anime_480.webp` / `santa_anime_800.webp` を候補として保存。原本：`_src/christmas/santa_anime.png`（git管理対象外）。
 - 前の候補：`hero_christmas_*.webp` / `hero_christmas_1200.jpg`、`christmas.css`、`abs_mart_logo_christmas.svg` を保存。`candidate-a/` から閲覧できます。
 - 新しいロゴ：`abs_mart_logo_toyland.svg`。共有用画像は最初の候補の `hero_christmas_1200.jpg` を引き続き使用しています。
 - 各生成プロンプトは末尾に記録しています。
 
 ハロウィンのCSS・3Dモデル・画像は履歴用に残していますが、現行ページでは読み込みません。
+
+<details>
+<summary>現行バストアップの生成プロンプト（組み込み imagegen）</summary>
+
+```text
+Use case: identity-preserve
+Asset type: high-resolution transparent anime bust portrait for a website, a NEW replacement illustration.
+Reference image: use ONLY the adult woman's character identity — tan skin, blonde hair with pink ends, turquoise twin hair clips, confident gyaru smile, heart earrings. Do not retain Halloween costume or background.
+Primary request: a beautifully drawn CRISP bust-up anime portrait of this adult woman wearing a classic red Santa hat and red Santa coat with a thick ivory fur collar and a small gold heart pendant. She faces the viewer, shoulders slightly angled, head gently tilted, both eyes open and a bright friendly smile.
+Framing: BUST UP ONLY, from the complete Santa hat down to the lower chest. Her face occupies about 35% of the full image height. Entire hat and both shoulders visible, balanced centered composition. Arms hang naturally DOWN OUTSIDE THE FRAME. Absolutely NO hands, NO fingers, NO gift box, NO waving pose. Bottom is a clean chest-level portrait crop.
+Art direction: clean Japanese anime key art, sharp confident ink outlines, crisp eyelashes, sharply separated hair strands, hard-edged two-tone cel shadows, vibrant but controlled color. Precise clean anatomy and facial proportions. No blur, no depth-of-field, no haze, no glow around the character, no painterly soft shading, no plastic skin. Preserve readable strong silhouette at website size.
+Background: genuinely transparent alpha including every area outside the character, with clean opaque character pixels and only narrow antialiased edge pixels. No background colors, no gradient backdrop, no cast shadow, no vignette, no atmospheric fringe. No text or logos.
+Output: square composition, 2048 x 2048 if possible; maximum sharpness and detail at native resolution.
+```
+
+</details>
 
 ### 確認
 
@@ -67,10 +85,11 @@ toyland.css                    新しい3Dクリスマス版のスタイル
 christmas-models.js            サンタ・トナカイ・雪だるま・ツリー・ギフトの形状
 christmas-world.js             3D描画・操作・アニメーションの制御
 vendor/three/                  Three.js 0.180.0とMITライセンス
-santa_anime_*.webp             新しいアニメ塗りの透過サンタ立ち絵
+santa_bust_*.webp              現行の透過サンタ・バストアップ
+santa_anime_*.webp             前の全身イラスト（保存）
 candidate-a/                   最初の候補の比較用ページ
 christmas.css                  最初の候補用のスタイル
-script.js                      ナビ追従・出現アニメ
+script.js                      ナビ追従・出現アニメ・雪と電飾の停止制御
 hero-depth.js                  旧ハロウィン版の立体視差（現在は未使用）
 favicon-christmas.svg          クリスマス版ファビコン
 abs_mart_logo_toyland.svg       新しい3D版のロゴ

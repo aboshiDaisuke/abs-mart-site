@@ -1,6 +1,6 @@
 // One locally bundled Three.js scene. Motion stops when hidden, offscreen, or paused.
 const stage = document.getElementById('world-stage');
-const motionButton = document.querySelector('.motion-toggle');
+const heroSection = document.getElementById('hero');
 const controls = document.querySelector('.world-controls');
 const message = document.querySelector('.world-message');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -15,13 +15,12 @@ function showFallback(error) {
   stage.querySelector('.fallback-message').textContent = 'サンタの広場へようこそ！ゲームとツールも楽しんでね。';
   stage.dataset.state = 'fallback';
   controls.hidden = true;
-  motionButton.hidden = true;
 }
 
 async function initWorld() {
   const [T, { createChristmasModels }] = await Promise.all([
     import('./vendor/three/three.module.min.js'),
-    import('./christmas-models.js?v=compact'),
+    import('./christmas-models.js?v=lights'),
   ]);
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
@@ -56,14 +55,44 @@ async function initWorld() {
   const raycaster = new T.Raycaster();
   const pointer = new T.Vector2();
   const cameraTarget = new T.Vector2();
-  let paused = false, inView = true, destroyed = false, contextLost = false;
+  let inView = true, destroyed = false, contextLost = false;
   let frame = 0, elapsed = 0, lastTime = 0, narrow = false;
   let activeCharacter = '', effectStarted = -10;
   let giftProgress = 0;
-  const moving = () => !paused && !reduceMotion.matches && !connection?.saveData;
+  const moving = () => heroSection?.dataset.holidayPaused !== 'true' && !reduceMotion.matches && !connection?.saveData;
+
+  // Camera-facing optical halos: bright white cores, warm light falloff, one draw call.
+  const glowCanvas = document.createElement('canvas'); glowCanvas.width = glowCanvas.height = 128;
+  const glowContext = glowCanvas.getContext('2d');
+  const glowGradient = glowContext.createRadialGradient(64, 64, 0, 64, 64, 64);
+  glowGradient.addColorStop(0, '#ffffff');
+  glowGradient.addColorStop(.06, '#fffffff0');
+  glowGradient.addColorStop(.15, '#ffffffa0');
+  glowGradient.addColorStop(.38, '#ffffff30');
+  glowGradient.addColorStop(1, '#ffffff00');
+  glowContext.fillStyle = glowGradient; glowContext.fillRect(0, 0, 128, 128);
+  const glowTexture = new T.CanvasTexture(glowCanvas);
+  const bulbs = actors.tree.userData.bulbs;
+  const glowPositions = new Float32Array(bulbs.length * 3);
+  const glowColors = new Float32Array(bulbs.length * 3);
+  bulbs.forEach((bulb, i) => {
+    bulb.position.toArray(glowPositions, i * 3);
+    bulb.material.color.toArray(glowColors, i * 3);
+  });
+  const glowGeometry = new T.BufferGeometry();
+  glowGeometry.setAttribute('position', new T.BufferAttribute(glowPositions, 3));
+  glowGeometry.setAttribute('color', new T.BufferAttribute(glowColors, 3));
+  const glowMaterial = new T.PointsMaterial({ map: glowTexture, vertexColors: true, size: 32, sizeAttenuation: false, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: .9, toneMapped: false });
+  const bulbGlows = new T.Points(glowGeometry, glowMaterial);
+  bulbGlows.name = 'tree-light-halos'; bulbGlows.raycast = () => {};
+  actors.tree.add(bulbGlows);
+  const starGlowMaterial = new T.SpriteMaterial({ map: glowTexture, color: 0xffcf66, transparent: true, opacity: .7, blending: T.AdditiveBlending, depthWrite: false, toneMapped: false });
+  const starGlow = new T.Sprite(starGlowMaterial); starGlow.scale.set(1.8, 1.8, 1);
+  starGlow.position.copy(actors.tree.userData.star.position); starGlow.position.z += .1;
+  starGlow.raycast = () => {}; actors.tree.add(starGlow);
 
   // One particle draw call for the whole snowfield.
-  const snowCount = 120;
+  const snowCount = 150;
   const snowPositions = new Float32Array(snowCount * 3);
   const snowSeeds = [];
   for (let i = 0; i < snowCount; i++) {
@@ -77,7 +106,8 @@ async function initWorld() {
   gradient.addColorStop(0, '#ffffff'); gradient.addColorStop(.4, '#ffffffe6'); gradient.addColorStop(1, '#ffffff00');
   ctx.fillStyle = gradient; ctx.fillRect(0, 0, 32, 32);
   const snowTexture = new T.CanvasTexture(dotCanvas);
-  const snowMaterial = new T.PointsMaterial({ color: 0xf5fffc, size: .075, map: snowTexture, transparent: true, opacity: .85, depthWrite: false });
+  // Orthographic points use CSS pixels; sub-pixel world-unit sizes would vanish.
+  const snowMaterial = new T.PointsMaterial({ color: 0xf5fffc, size: 2.6, sizeAttenuation: false, map: snowTexture, transparent: true, opacity: .85, depthWrite: false });
   const snow = new T.Points(snowGeometry, snowMaterial); scene.add(snow);
 
   function resize() {
@@ -87,6 +117,7 @@ async function initWorld() {
     const nextNarrow = width / height < 2.4;
     narrow = nextNarrow;
     models.layout(narrow);
+    glowMaterial.size = narrow ? 22 : 32;
     treeLight.position.set(narrow ? .1 : .2, 3.3, narrow ? -.3 : .4);
     const viewHeight = narrow
       ? Math.max(6.4, 10.4 / (width / height))
@@ -120,7 +151,10 @@ async function initWorld() {
     const star = actors.tree.userData.star;
     star.rotation.y = animation ? Math.sin(t * .8) * .22 : 0;
     star.scale.setScalar(activeCharacter === 'tree' ? 1.18 + (animation ? effect * .15 : 0) : 1);
-    treeLight.intensity = activeCharacter === 'tree' ? 13 : 7;
+    const shimmer = animation ? .82 + Math.sin(t * 1.7) * .12 : .9;
+    glowMaterial.opacity = activeCharacter === 'tree' ? 1 : shimmer;
+    starGlowMaterial.opacity = activeCharacter === 'tree' ? .95 : shimmer * .8;
+    treeLight.intensity = activeCharacter === 'tree' ? 18 : 10;
     const target = actors.gift.userData.open ? 1 : 0;
     giftProgress = animation ? T.MathUtils.lerp(giftProgress, target, .13) : target;
     actors.gift.userData.lid.position.y = .88 + giftProgress * .67;
@@ -151,9 +185,6 @@ async function initWorld() {
   }
   function updateMotion() {
     cancelAnimationFrame(frame); frame = 0; lastTime = 0;
-    motionButton.hidden = reduceMotion.matches || Boolean(connection?.saveData);
-    motionButton.setAttribute('aria-pressed', String(paused));
-    motionButton.innerHTML = paused ? '<span aria-hidden="true">▶</span> 動かす' : '<span aria-hidden="true">Ⅱ</span> 動きを止める';
     render();
     if (!destroyed && !contextLost && moving() && inView && !document.hidden) frame = requestAnimationFrame(tick);
   }
@@ -176,7 +207,6 @@ async function initWorld() {
     render();
   }
   document.querySelectorAll('[data-character]').forEach(button => button.addEventListener('click', () => interact(button.dataset.character)));
-  motionButton.addEventListener('click', () => { paused = !paused; updateMotion(); });
   let down = null;
   canvas.addEventListener('pointerdown', event => { down = { x: event.clientX, y: event.clientY }; });
   canvas.addEventListener('pointercancel', () => { down = null; });
@@ -205,10 +235,11 @@ async function initWorld() {
   visibilityObserver.observe(stage);
   reduceMotion.addEventListener('change', updateMotion);
   connection?.addEventListener('change', updateMotion);
+  window.addEventListener('holiday-motion-change', updateMotion);
   document.addEventListener('visibilitychange', updateMotion);
   canvas.addEventListener('webglcontextlost', event => {
     event.preventDefault(); contextLost = true; cancelAnimationFrame(frame);
-    stage.querySelector('.world-fallback').hidden = false; canvas.hidden = true; controls.hidden = true; motionButton.hidden = true;
+    stage.querySelector('.world-fallback').hidden = false; canvas.hidden = true; controls.hidden = true;
     stage.dataset.state = 'fallback';
   });
   canvas.addEventListener('webglcontextrestored', () => {
@@ -228,6 +259,7 @@ async function initWorld() {
     resizeObserver.disconnect(); visibilityObserver.disconnect();
     reduceMotion.removeEventListener('change', updateMotion);
     connection?.removeEventListener('change', updateMotion);
+    window.removeEventListener('holiday-motion-change', updateMotion);
     document.removeEventListener('visibilitychange', updateMotion);
     const geometries = new Set(), materials = new Set();
     scene.traverse(object => {
@@ -236,7 +268,7 @@ async function initWorld() {
     });
     for (const geometry of geometries) geometry.dispose();
     for (const material of materials) material.dispose();
-    snowTexture.dispose(); renderer.dispose();
+    snowTexture.dispose(); glowTexture.dispose(); renderer.dispose();
   }
   window.addEventListener('pagehide', dispose);
   window.addEventListener('pageshow', event => { if (event.persisted) updateMotion(); });
