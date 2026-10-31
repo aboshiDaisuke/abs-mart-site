@@ -32,13 +32,14 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 
 新しい候補は `christmas-toyland-2026` ブランチです。夜空、キャンディカラーの見出し、アニメ塗りのサンタ衣装のぐろちゃんと、Three.jsの雪の広場を組み合わせています。
 
-トップは、ぐろちゃんを大きく配置した背景と、手前の3Dの地面・サンタたちを同じビジュアル内に重ねています。ぐろちゃんは顔と輪郭がくっきりしたバストアップに描き直し、手がフレームに入らない構図にしています。イラスト専用の固定高さをなくし、スマホの説明とボタンも内容に沿って並べ、作品一覧までの余白を詰めています。
+トップは、ぐろちゃんを大きく配置した背景と、手前の3Dの地面・サンタたちを同じビジュアル内に重ねています。ぐろちゃんは元の赤いオフショルダー衣装・白いファー・ハートのアクセサリーを保ち、見る側の左でピースする一枚のイラストとして描き直しました。肩から肘・手首を含めて描いており、別画像の手は重ねません。スマホでは説明文の下にイラストを置いて手や肘を切り抜かず、手前の雪の広場を重ねています。
 
 雪の地面は厚みのある円形台座から、画面の下端を越えて続く雪原に変更しています。3Dの雪面と操作ボタンの背景を同じ色でつなぎ、下の赤い帯まで隙間が出ない構成です。影は別の受け面で描画し、雪面自体の色は照明や露出で変えません。
 
 - **新しい3D版**：`/`（ローカルでは http://127.0.0.1:8000/ ）
 - **最初の候補**：`/candidate-a/`（元の `christmas-2026` ブランチも保持）
 - **モデル**：サンタ、トナカイ、雪だるま、オーナメントと電飾付きツリー、リボン付きプレゼント。`christmas-models.js` で形状から制作しています。
+- **プレゼントの配置**：ツリーの枝にめり込んでいた根元の箱をなくし、プレゼントを右側へ分離。PCでは小さな2箱と開閉できる大きな箱を間隔を空けて並べ、スマホでは大きな箱を表示します。ツリー・雪だるま・ほかの箱との画面上の重なりと、画面端での切れを座標計算で確認しています。
 - **操作**：モデルをタップ、または下のボタンをクリック／キーボード操作。サンタの手振り、トナカイの首振り、雪だるまのリアクション、ツリーの星と照明、プレゼントの開閉を楽しめます。
 - **電飾と雪**：上部の電球に白い光の芯・色付きのにじみ・きらめきを加え、3Dツリーにも加算合成の光を追加。背景全体を3層の雪が流れ、広場にも3Dの雪が降ります。
 - **動作制御**：雪・電飾・3Dをまとめて停止・再開。動きを減らす設定、データセーバー、画面外・バックグラウンドでのアニメーション停止に対応。WebGLが使えない場合は静的な広場と通常の作品一覧を表示し、背景の雪と停止操作は引き続き使えます。
@@ -50,7 +51,8 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 
 組み込みの imagegen ツールで、既存キャラクターを参照したアニメ塗りの透過イラストを制作しました。
 
-- 現行のバストアップ：`santa_bust_full.webp`（1254×1254px・透過・可逆圧縮）と `santa_bust_640.webp` / `santa_bust_960.webp`。原本：`_src/christmas/santa_bust_v2.png`（git管理対象外）。表示枠の幅だけでなく `object-fit: cover` による拡大を考慮して画像を選び、画像自体へのぼかし・影フィルターも外しています。
+- 現行のピース姿：`santa_peace_full.webp`（1254×1254px・透過・可逆圧縮）と `santa_peace_640.webp` / `santa_peace_960.webp`。原本：`_src/christmas/santa_peace_v4.png`（git管理対象外）。全体を一枚絵として描き直し、表示サイズに合った画像を読み込みます。
+- 前のバストアップ：`santa_bust_full.webp` / `santa_bust_640.webp` / `santa_bust_960.webp` を保存。原本：`_src/christmas/santa_bust_v2.png`（git管理対象外）。今回の顔・髪・衣装の参照元です。
 - 不採用の手の重ね合わせ案：`santa_peace_hand_full.webp` / `santa_peace_hand_640.webp`。原本：`_src/christmas/santa_peace_hand.png`（git管理対象外）。元絵の下がった腕とつながらず不自然だったため、ページから手の表示と位置調整処理を撤去しました。素材は履歴用に保存し、現行ページでは読み込みません。
 - 前の全身イラスト：`santa_anime_480.webp` / `santa_anime_800.webp` を候補として保存。原本：`_src/christmas/santa_anime.png`（git管理対象外）。
 - 前の候補：`hero_christmas_*.webp` / `hero_christmas_1200.jpg`、`christmas.css`、`abs_mart_logo_christmas.svg` を保存。`candidate-a/` から閲覧できます。
@@ -60,7 +62,7 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 ハロウィンのCSS・3Dモデル・画像は履歴用に残していますが、現行ページでは読み込みません。
 
 <details>
-<summary>現行バストアップの生成プロンプト（組み込み imagegen）</summary>
+<summary>前のバストアップの生成プロンプト（組み込み imagegen）</summary>
 
 ```text
 Use case: identity-preserve
@@ -89,6 +91,23 @@ DO NOT include any face, head, hair, neck, torso, chest, necklace, hat, or other
 
 </details>
 
+<details>
+<summary>現行ピース姿の生成プロンプト（組み込み imagegen・元のバストアップを参照）</summary>
+
+```text
+Create one new, coherent anime illustration using the reference for this adult Christmas mascot's identity and clothing design.
+
+The picture focuses on her cheerful smiling face and a natural right-hand peace sign, which appears on the VIEWER'S LEFT. Repose the whole shoulder, upper arm, bent elbow, forearm and hand together. Show a believable bent arm, normal adult proportions, one shoulder connection, one elbow and one wrist. The original lowered right-arm pose must be replaced. Use correct overlaps between the raised arm, sleeve, hair and torso. Her other arm remains down.
+
+Keep her recognizable face, tan skin, blonde hair with pink ends, turquoise twin hair clips, pink heart earrings, gold chain with pink heart pendant, and red Santa hat. Preserve the reference's red off-shoulder Santa clothing with its broad fluffy ivory fur neckline and gold button. Keep this same clothing style and colors; do not substitute a high-neck coat or a center fur stripe.
+
+Friendly everyday holiday pose, face and gesture as the visual focus, relaxed expression, normal anatomy. Frame from above the Santa hat to the upper chest, keeping the entire raised hand and bent arm visible on the left. Palm faces the viewer; index and middle fingers form a V, ring and little fingers curl into the palm, and one thumb rests across them. Five fingers total.
+
+Clean Japanese anime cel shading, crisp outlines, sharp eyes and hair strands. Single complete character illustration on a genuinely transparent background. No detached hand layer, no separate body parts, no scenery, text, haze, glow, or blur.
+```
+
+</details>
+
 ### 確認
 
 JavaScriptの構文、13作品へのリンクとローカル画像参照、5種類の3Dモデル生成、320〜1380px幅のカメラ内への収まりを確認。モック描画環境で、プレゼント開閉、全キャラクターの操作、停止・再開、動きを減らす設定、データセーバー、WebGL障害時のフォールバック、コンテキスト復旧、ページ復帰・破棄を確認しています。ブラウザ連携が起動できず、新しい版の実ブラウザでの描画・目視確認は未実施です。
@@ -102,7 +121,8 @@ toyland.css                    新しい3Dクリスマス版のスタイル
 christmas-models.js            サンタ・トナカイ・雪だるま・ツリー・ギフトの形状
 christmas-world.js             3D描画・操作・アニメーションの制御
 vendor/three/                  Three.js 0.180.0とMITライセンス
-santa_bust_*.webp              現行の透過サンタ・バストアップ
+santa_peace_*.webp             現行のピース姿の一枚絵
+santa_bust_*.webp              前のバストアップ（保存）
 santa_peace_hand_*.webp        不採用の手の重ね合わせ案（未使用）
 santa_anime_*.webp             前の全身イラスト（保存）
 candidate-a/                   最初の候補の比較用ページ

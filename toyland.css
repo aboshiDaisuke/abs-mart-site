@@ -88,7 +88,7 @@ body { background: var(--paper); background-image: none; }
 .art-star-two { right: 4%; top: 56%; font-size: 40px; }
 
 /* Real, interactive geometry rendered by Three.js. */
-.christmas-world { position: relative; z-index: 5; width: 100%; margin: -8px auto 0; scroll-margin-top: calc(var(--nav-h) + 12px); }
+.christmas-world { --stage-height: 250px; position: relative; z-index: 5; width: 100%; margin: -8px auto 0; scroll-margin-top: calc(var(--nav-h) + 12px); }
 /* The same snow color continues from the canvas through the controls to the ribbon. */
 .christmas-world::before { content: ""; position: absolute; z-index: -1; top: 55%; bottom: 0; left: calc(50% - 50vw); width: 100vw; border-radius: 50% 50% 0 0 / 30px 30px 0 0; background: #e2f3ee; pointer-events: none; }
 .world-heading { position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; align-items: center; justify-content: space-between; width: auto; margin: 0; padding: 0; }
@@ -97,7 +97,7 @@ body { background: var(--paper); background-image: none; }
 .world-heading h2 { margin-top: 4px; color: #fff7e3; font-size: 12px; font-weight: 800; }
 .motion-toggle { padding: 7px 13px; min-height: 35px; border: 1px solid #bbdcd570; border-radius: 20px; background: #123749; color: #e8f4e8; font: 700 10px var(--font-body); cursor: pointer; }
 .motion-toggle:hover { background: #255b69; }
-.world-stage { position: relative; height: 250px; margin: 0; }
+.world-stage { position: relative; height: var(--stage-height); margin: 0; }
 .world-stage canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; }
 .world-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 4vw, 60px); padding-bottom: 55px; font-size: clamp(38px, 6vw, 85px); }
 .fallback-tree { font-size: clamp(80px, 13vw, 160px); }
@@ -178,8 +178,8 @@ body { background: var(--paper); background-image: none; }
   .hero-copy {
     display: grid; width: 100%; padding: 0;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas: "eyebrow eyebrow" "title title" "tagline ." "lead ." "action ." "smallprint .";
-    column-gap: 10px; row-gap: 10px; align-items: center;
+    grid-template-areas: "eyebrow eyebrow" "title title" "tagline tagline" "lead lead" "action smallprint";
+    column-gap: 12px; row-gap: 8px; align-items: center; text-align: center;
   }
   .hero-copy .eyebrow { grid-area: eyebrow; justify-content: center; font-size: 8px; letter-spacing: .035em; gap: 7px; }
   .hero-copy .eyebrow span { font-size: 12px; }
@@ -193,18 +193,19 @@ body { background: var(--paper); background-image: none; }
   .hero-lead { text-shadow: 0 2px 6px #102b40; grid-area: lead; margin: 0; padding: 0; width: auto; font-size: 11px; line-height: 1.8; }
   .hero-copy .btn { grid-area: action; justify-self: start; width: 100%; margin: 0; min-height: 43px; padding: 8px 6px; border-radius: 11px; font-size: 10px; line-height: 1.5; gap: 3px; }
   .hero-copy .btn > span:first-child { display: none; }
-  .hero-smallprint { text-shadow: 0 1px 5px #102b40; grid-area: smallprint; margin: 0; align-self: start; font-size: 8px; text-align: center; line-height: 1.8; }
+  .hero-smallprint { text-shadow: 0 1px 5px #102b40; grid-area: smallprint; margin: 0; align-self: center; font-size: 8px; text-align: center; line-height: 1.8; }
   .hero-smallprint span { display: block; height: 1px; font-size: 0; }
-  .santa-art { top: 104px; right: -22px; bottom: 48px; width: 68%; height: auto; margin: 0; }
-  .santa-art img { object-position: 55% 0; }
+  /* Keep the whole gesture visible, with copy above it and the snow in front. */
+  .santa-art { position: relative; top: auto; right: auto; bottom: auto; width: min(100%, 420px); aspect-ratio: 1; height: auto; margin: 8px auto 0; }
+  .santa-art img { object-fit: contain; object-position: 50% 0; }
   .santa-bubble { top: 0; right: 0; padding: 6px 9px; font-size: 9px; }
   .art-star-one { left: 0; top: 20px; font-size: 21px; }
   .art-star-two { right: 0; font-size: 27px; }
-  .christmas-world { width: calc(100% + 32px); margin: -4px -16px 0; }
+  .christmas-world { --stage-height: clamp(220px, 60vw, 280px); width: calc(100% + 32px); margin: calc(var(--stage-height) * -.7) -16px 0; }
   .world-heading { right: 0; top: 8px; }
   .world-heading h2 { margin: 0; font-size: 10px; }
   .motion-toggle { min-height: 29px; padding: 5px 8px; font-size: 9px; }
-  .world-stage { height: clamp(220px, 60vw, 280px); margin: 0; }
+  .world-stage { margin: 0; }
   .world-controls { margin-top: -36px; padding: 0 12px 8px; }
   .world-buttons { gap: 4px; }
   .world-buttons button { flex: 1; max-width: 92px; gap: 3px; min-height: 36px; padding: 5px 3px; border-radius: 9px; font-size: 8px; }
