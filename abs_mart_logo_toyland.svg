@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 76" role="img" aria-labelledby="title">
+  <title id="title">ABS Mart Christmas Edition</title>
+  <path d="M8 29C10 11 20 4 33 5c12 0 19 8 20 17L40 17 31 26Z" fill="#fa405c"/>
+  <circle cx="51" cy="24" r="7" fill="#fffaf0" stroke="#d6c9ad"/>
+  <path d="M9 26q14-7 29-2l-1 10q-15-4-28 2Z" fill="#fffaf0" stroke="#d6c9ad"/>
+  <text x="9" y="61" fill="#fff8e7" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="900" letter-spacing="-2">ABS <tspan fill="#fa405c">Mart</tspan></text>
+  <path d="m263 32 2 7 7 2-7 2-2 7-2-7-7-2 7-2Z" fill="#ffe29b"/>
+</svg>

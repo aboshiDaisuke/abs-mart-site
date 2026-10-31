@@ -38,28 +38,3 @@ if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
 } else {
   revealEls.forEach((el) => el.classList.add("is-revealed"));
 }
-
-// Decorative snowfall respects reduced motion, data saving, and a manual pause.
-const snow = document.querySelector(".christmas-snow");
-const snowToggle = document.querySelector(".snow-toggle");
-const dataConnection = navigator.connection;
-let snowPaused = false;
-
-if (snow && snowToggle) {
-  const updateSnow = () => {
-    const available = !prefersReducedMotion.matches && !dataConnection?.saveData;
-    const active = available && !snowPaused;
-    snow.classList.toggle("is-snowing", active);
-    snowToggle.hidden = !available;
-    snowToggle.setAttribute("aria-pressed", String(active));
-    snowToggle.querySelector(".snow-toggle-label").textContent = active ? "雪を止める" : "雪を降らせる";
-  };
-
-  snowToggle.addEventListener("click", () => {
-    snowPaused = !snowPaused;
-    updateSnow();
-  });
-  prefersReducedMotion.addEventListener("change", updateSnow);
-  dataConnection?.addEventListener("change", updateSnow);
-  updateSnow();
-}

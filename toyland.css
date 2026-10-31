@@ -1,0 +1,217 @@
+/* Christmas Toyland — candy colors, anime character art, and a 3D snow stage. */
+:root {
+  --paper: #f0faf4; --paper-deep: #d9f0e4; --bg-clean: #f0faf4;
+  --surface: #fffef7; --ink: #163b39; --text: #234843; --muted: #536e67;
+  --pink: #eb3652; --pink-hot: #ca2343; --pink-soft: #ffe3e8;
+  --cobalt: #00856b; --cobalt-deep: #006954; --gold: #ffe18a; --grape: #eb3652;
+  --grad-gal: linear-gradient(120deg, #f34b5f, #e82f50);
+  --nav-h: 82px; --gutter: clamp(20px, 4vw, 52px);
+}
+body { background: var(--paper); background-image: none; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid #ffbe3b; outline-offset: 5px; }
+#navbar, #navbar.is-scrolled { background: #102b40ee; border: 0; box-shadow: 0 1px 0 #ffffff18; }
+.nav-inner { width: min(1320px, calc(100% - var(--gutter) * 2)); }
+.logo-img { width: 180px; height: auto; }
+.logo-sub { margin: 1px 0 0 6px; color: #addbd1; font: 700 8px var(--font-body); letter-spacing: .18em; }
+.nav-season { color: #cce7e4; font-size: 9px; font-weight: 800; letter-spacing: .12em; }
+.nav-actions { gap: 12px; }
+.nav-link, .nav-link:first-child, .nav-link:nth-child(2) { padding: 9px 16px; border: 1px solid #ffffff30; color: #fffbe9; background: #ffffff0b; box-shadow: none; font-size: 12px; }
+.nav-link:first-child { background: #e73653; border-color: #f57585; }
+.nav-link:hover, .nav-link:focus-visible { background: #ffffff20; transform: translateY(-2px); box-shadow: none; }
+.nav-link svg { width: 15px; height: 15px; }
+
+/* A full-width midnight Christmas playground. */
+#hero {
+  position: relative; isolation: isolate;
+  padding: calc(var(--nav-h) + 38px) 0 0;
+  background: radial-gradient(ellipse at 78% 27%, #186b7370, transparent 43%), linear-gradient(180deg, #102b40, #153d50 65%, #1b5361);
+  overflow: hidden;
+}
+#hero::before { content: ""; position: absolute; inset: auto -5% -20px; width: auto; height: 280px; border: 0; border-radius: 50% 50% 0 0; background: #e2f3ee; transform: none; z-index: -1; }
+#hero::after { display: none; }
+.hero-inner { width: min(1200px, calc(100% - var(--gutter) * 2)); }
+.winter-stars { position: absolute; inset: 0; z-index: -1; opacity: .75; background-image: radial-gradient(circle at 24px 50px, #fffdf0 0 1px, transparent 2px), radial-gradient(circle at 170px 110px, #b8f1f0 0 1.5px, transparent 2.5px), radial-gradient(circle at 68px 190px, #ffdf9b 0 1px, transparent 2px); background-size: 257px 283px, 393px 331px, 317px 249px; }
+.string-lights { position: absolute; top: calc(var(--nav-h) - 9px); left: -2%; width: 104%; display: flex; justify-content: space-between; height: 35px; border-bottom: 2px solid #9fb4a55e; border-radius: 0 0 50% 50%; pointer-events: none; }
+.string-lights i { position: relative; top: 24px; width: 8px; height: 15px; border-radius: 45%; background: #ffd782; box-shadow: 0 0 17px 5px #ffd78244; transform: rotate(10deg); }
+.string-lights i:nth-child(3n) { background: #ff7083; box-shadow: 0 0 17px 5px #ff708344; }
+.string-lights i:nth-child(3n + 1) { background: #7fe5ca; box-shadow: 0 0 17px 5px #7fe5ca44; }
+.string-lights i:nth-child(-n + 3), .string-lights i:nth-last-child(-n + 3) { top: 12px; }
+.toyland-intro { position: relative; min-height: 510px; }
+.hero-copy { position: relative; z-index: 4; grid-area: auto; width: 60%; padding: 25px 0 25px 24px; margin: 0; border: 0; border-radius: 0; background: none; box-shadow: none; transform: none; }
+.hero-copy::before { display: none; }
+.eyebrow { color: #a6e7d8; font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: .1em; }
+.hero-copy .eyebrow { gap: 11px; }
+.hero-copy .eyebrow span { color: #ffda83; font-size: 17px; }
+.hero-title { margin-top: 18px; font-family: var(--font-display); font-size: clamp(48px, 6.25vw, 84px); line-height: 1.06; font-weight: 700; letter-spacing: -.035em; text-wrap: initial; transform: rotate(-3deg); transform-origin: 0 50%; }
+.merry-word, .christmas-word { display: block; width: fit-content; }
+.merry-word { color: #fff8dd; text-shadow: 0 5px 0 #006c5d, 3px 7px 0 #082e31; }
+.christmas-word { color: #ff5368; -webkit-text-stroke: 6px #fff8dd; paint-order: stroke fill; text-shadow: 0 7px 0 #ad173a, 3px 10px 0 #082e31; }
+.hero-tagline { margin-top: 29px; color: #fff8e5; font-size: 21px; line-height: 1.65; font-weight: 800; }
+.hero-tagline strong { color: #ffe394; font-weight: 800; }
+.hero-lead { margin-top: 13px; color: #c3e0dd; font-size: 12px; font-weight: 500; line-height: 1.85; }
+.hero-copy .btn { margin-top: 22px; min-height: 51px; border: 2px solid #fff7dd; border-radius: 14px; padding: 0 24px; font-size: 13px; box-shadow: 0 5px 0 #9d2039, 0 8px 18px #071b3233; }
+.hero-copy .btn:hover, .hero-copy .btn:focus-visible { box-shadow: 0 7px 0 #9d2039; transform: translateY(-2px); }
+.hero-smallprint { margin-top: 14px; color: #a7c9c7; font-size: 9px; }
+.hero-smallprint span { margin-inline: 8px; color: #ffd987; }
+.santa-art { position: absolute; top: -15px; right: 0; z-index: 3; width: 43%; height: 560px; pointer-events: none; }
+.santa-art img { position: relative; z-index: 2; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 8px 0 #082c3b30); transform: rotate(4deg); }
+.art-orbit { position: absolute; top: 10%; left: -1%; width: 99%; aspect-ratio: 1; border: 1px solid #89dfcb50; border-radius: 50%; background: radial-gradient(circle, #64bba34a, #78ebd011 65%, transparent 66%); }
+.art-orbit::before { content: ""; position: absolute; inset: 16px; border: 1px dashed #a7ebd844; border-radius: 50%; }
+.santa-bubble { position: absolute; top: 40px; right: -10px; z-index: 3; padding: 12px 18px; border: 2px solid #fff2cb; border-radius: 50% 50% 50% 6px; background: #fff9df; color: #cf2446; font-size: 16px; font-weight: 800; transform: rotate(9deg); box-shadow: 3px 4px 0 #006a62; }
+.art-star { position: absolute; z-index: 3; color: #ffe18e; font-size: 45px; text-shadow: 0 0 20px #ffd88944; }
+.art-star-one { top: 0; left: 2%; transform: rotate(12deg); }
+.art-star-two { right: 4%; top: 56%; font-size: 62px; }
+.previous-candidate { position: absolute; z-index: 5; right: 0; bottom: 5px; color: #cae6df; font-size: 10px; text-underline-offset: 4px; }
+
+/* Real, interactive geometry rendered by Three.js. */
+.christmas-world { position: relative; z-index: 4; max-width: 1380px; margin: 0 auto; scroll-margin-top: calc(var(--nav-h) + 12px); }
+.world-heading { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; width: min(1200px, calc(100% - var(--gutter) * 2)); margin: 0 auto; padding: 20px 0 0; }
+.world-kicker { font-size: 8px; color: #b5dfd8; letter-spacing: .18em; font-weight: 800; }
+.world-heading h2 { margin-top: 4px; color: #fff7e3; font-size: 16px; font-weight: 800; }
+.motion-toggle { padding: 7px 13px; min-height: 35px; border: 1px solid #bbdcd570; border-radius: 20px; background: #123749; color: #e8f4e8; font: 700 10px var(--font-body); cursor: pointer; }
+.motion-toggle:hover { background: #255b69; }
+.world-stage { position: relative; height: 380px; margin-top: -15px; }
+.world-stage canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; }
+.world-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 4vw, 60px); padding-bottom: 55px; font-size: clamp(38px, 6vw, 85px); }
+.fallback-tree { font-size: clamp(80px, 13vw, 160px); }
+.fallback-message { position: absolute; bottom: 30px; left: 0; right: 0; color: #315d57; font-size: 13px; font-weight: 700; text-align: center; }
+.world-controls { position: relative; z-index: 3; padding: 0 18px 20px; margin-top: -30px; text-align: center; }
+.world-hint { margin-bottom: 10px; font-size: 11px; color: #456f66; font-weight: 700; }
+.world-hint span { color: #cf2e4d; }
+.world-buttons { display: flex; justify-content: center; gap: 9px; }
+.world-buttons button { display: inline-flex; align-items: center; gap: 5px; padding: 8px 15px; min-height: 39px; border: 1px solid #b0cec2; border-radius: 30px; background: #fffdf4; color: #28564c; font: 800 11px var(--font-body); box-shadow: 0 3px 0 #aecdc2; cursor: pointer; transition: transform .2s, background .2s; }
+.world-buttons button:hover, .world-buttons button:focus-visible { background: #ffefc3; transform: translateY(-3px); }
+.world-buttons button.is-active { background: #e73554; color: white; border-color: #b71c3f; box-shadow: 0 3px 0 #a6253c; }
+.world-buttons button span { font-size: 17px; }
+.world-message { min-height: 24px; margin-top: 13px; color: #3c6659; font-size: 11px; }
+.snow-bank { position: absolute; bottom: -2px; left: -2%; right: -2%; height: 45px; border-radius: 50% 50% 0 0; background: #e2f3ee; z-index: 0; }
+.holiday-marquee { display: flex; justify-content: center; gap: 35px; overflow: hidden; padding: 13px 0; background: #e83956; border-block: 3px solid #fff2db; color: #fff8d7; white-space: nowrap; font: 700 12px var(--font-display); letter-spacing: .07em; }
+
+/* Gifts on a snowy shelf. */
+#works { position: relative; padding: 65px 0 70px; background-color: #f0faf4; background-image: radial-gradient(#cbe4d5 1px, transparent 1px); background-size: 18px 18px; }
+#works .section-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; padding-bottom: 0; border: 0; text-align: center; }
+#works .section-heading .eyebrow { color: #b12842; font-size: 10px; }
+#works .section-heading .eyebrow span { margin-inline: 7px; color: #b98c24; }
+.section-title { color: #164e41; font-size: clamp(24px, 3vw, 36px); line-height: 1.5; }
+#works .section-title::after { display: none; }
+.work-group-heading { align-items: center; margin-bottom: 23px; gap: 16px; }
+.work-group-label, .work-group + .work-group .work-group-label { padding: 5px 14px; border: 2px solid #fffdf1; background: #007d65; color: white; box-shadow: 2px 3px 0 #a1d5b9; font: 700 12px var(--font-display); }
+.work-group + .work-group .work-group-label { background: #e33653; box-shadow: 2px 3px 0 #f2bcc7; }
+.work-group-title { color: #316454; font-size: 16px; }
+.work-group + .work-group { margin-top: 45px; padding-top: 35px; border-top: 2px dashed #b6d4c3; }
+.works-grid { gap: 28px; }
+.work-card, .work-card:nth-child(n), .js .work-card:nth-child(n)[data-reveal].is-revealed { padding: 12px 12px 9px; border: 2px solid #fff; border-radius: 16px; background: #fffef8; box-shadow: 4px 5px 0 #a5d3bd, 0 6px 14px #2a5b4510; transform: none; }
+.work-card:nth-child(even) { box-shadow: 4px 5px 0 #e7bcc3, 0 6px 14px #2a5b4510; }
+.work-card::before, .work-card:nth-child(even)::before { top: -11px; width: 74px; height: 21px; border: 2px solid white; border-radius: 3px; background: repeating-linear-gradient(125deg, #ee4d65 0 6px, #fff5dc 6px 12px); box-shadow: 0 2px 0 #273f3520; transform: translateX(-50%) rotate(-5deg); }
+.work-card:nth-child(even)::before { background: repeating-linear-gradient(125deg, #248d71 0 6px, #fff5dc 6px 12px); transform: translateX(-50%) rotate(5deg); }
+.work-card:hover, .js .work-card[data-reveal].is-revealed:hover { transform: translateY(-5px) rotate(-1deg); box-shadow: 5px 10px 0 #87c7a9; }
+.work-thumb { border: 0; border-radius: 9px; background: #d9eee1; }
+.work-icon { border-width: 2px; box-shadow: 2px 3px 0 #b5d3be; }
+.work-cat { color: #a22843; font-family: var(--font-display); font-size: 11px; }
+.work-title { color: #204d40; font-size: 17px; }
+.work-desc { color: #61746b; font-size: 13px; line-height: 1.85; }
+.work-card .work-open { border: 1px solid #d4e8dc; border-radius: 10px; background: #eff7ee; color: #007359; }
+.work-new { background: #ec3e58; color: white; border-color: #fff5d6; box-shadow: 2px 3px 0 #bd2140; }
+
+#points { padding: 58px 0 65px; border: 0; background: #d73550; background-image: radial-gradient(#f57b8d50 1.5px, transparent 2px); background-size: 23px 23px; }
+#points .eyebrow { color: #ffdea5; }
+#points .section-title { color: #fff7e2; }
+.points-grid { gap: 22px; }
+.point-card, .point-card:nth-child(n), .js .point-card:nth-child(n)[data-reveal].is-revealed { padding: 25px; border: 2px solid #fff; border-radius: 20px; background: #fffdf5; box-shadow: 5px 6px 0 #a3203d; transform: none; }
+.point-card:hover, .js .point-card[data-reveal].is-revealed:hover { transform: translateY(-3px); box-shadow: 5px 9px 0 #a3203d; }
+.point-card::after { content: "🎄"; font-size: 25px; }
+.point-card:nth-child(2)::after { content: "❄"; color: #31847e; }
+.point-card:nth-child(3)::after { content: "🎁"; font-size: 25px; }
+.point-icon, .point-card:nth-child(n) .point-icon { width: 49px; height: 49px; background: #e6f5e9; color: #008166; border: 2px solid #a7d0b5; box-shadow: 2px 3px 0 #a7d0b5; }
+.point-icon svg { width: 25px; height: 25px; }
+.point-no { margin-top: 15px; color: #d72f4a; font: 700 11px var(--font-display); }
+.point-title { margin-top: 7px; font-size: 18px; }
+.point-desc { font-size: 12px; }
+#footer { padding-top: 35px; padding-bottom: 24px; background: #102b40; border: 0; }
+#footer::before { height: 7px; background: repeating-linear-gradient(125deg, #ed4861 0 13px, #fff7df 13px 26px, #159c7c 26px 39px, #fff7df 39px 52px); }
+.footer-nav a { color: #cae3dd; font-size: 12px; }
+.footer-copy { font: 12px var(--font-body); color: #acc9c6; }
+.footer-copy span { margin-left: 16px; font-size: 10px; }
+.to-top { width: 50px; height: 50px; background: #e53853; border: 2px solid #fff8df; box-shadow: 2px 3px 0 #951832; }
+.to-top:hover, .to-top:focus-visible { box-shadow: 3px 5px 0 #951832; }
+
+@media (max-width: 1100px) {
+  .hero-copy { width: 62%; padding-left: 0; }
+  .santa-art { right: -15px; height: 530px; width: 44%; }
+  .hero-title { font-size: clamp(48px, 6.7vw, 76px); }
+  .santa-bubble { right: 0; font-size: 13px; }
+  .toyland-intro { min-height: 490px; }
+  .nav-season { display: none; }
+}
+@media (max-width: 760px) {
+  :root { --nav-h: 72px; --gutter: 20px; }
+  .logo-img { width: 145px; }
+  .nav-actions { gap: 7px; }
+  .nav-link, .nav-link:first-child, .nav-link:nth-child(2) { padding: 7px 11px; font-size: 11px; }
+  .nav-full { display: none; } .nav-short { display: inline; }
+  #hero { padding-top: calc(var(--nav-h) + 38px); }
+  .hero-inner { width: calc(100% - 36px); }
+  .toyland-intro { min-height: 675px; }
+  .hero-copy { width: 100%; padding: 0; text-align: center; }
+  .hero-copy .eyebrow { font-size: 8px; letter-spacing: .035em; gap: 7px; }
+  .hero-copy .eyebrow span { font-size: 12px; }
+  .hero-title { margin-top: 15px; font-size: clamp(43px, 10.5vw, 68px); transform-origin: 50% 50%; }
+  .merry-word, .christmas-word { margin-inline: auto; }
+  .merry-word { font-size: .85em; }
+  .christmas-word { -webkit-text-stroke-width: 4px; }
+  .hero-tagline { margin-top: 21px; font-size: 15px; line-height: 1.7; }
+  .hero-tagline br { display: none; }
+  .hero-tagline strong { display: block; }
+  .hero-lead { margin: 14px 0 0; width: 43%; padding-top: 53px; text-align: left; font-size: 11px; line-height: 1.9; }
+  .hero-copy .btn { position: absolute; left: 0; top: 408px; width: 43%; min-height: 62px; padding: 10px 12px; border-radius: 13px; font-size: 11px; line-height: 1.8; gap: 4px; flex-wrap: wrap; }
+  .hero-copy .btn > span:first-child { display: none; }
+  .hero-smallprint { position: absolute; left: 0; top: 502px; width: 43%; font-size: 8px; text-align: center; line-height: 1.9; }
+  .hero-smallprint span { display: block; height: 1px; font-size: 0; }
+  .santa-art { top: 235px; right: -25px; width: 66%; height: 410px; }
+  .santa-art img { transform: rotate(2deg); }
+  .santa-bubble { top: 2px; right: 9px; padding: 8px 12px; font-size: 11px; }
+  .art-star-one { left: 3%; top: 23px; font-size: 25px; }
+  .art-star-two { right: 3%; font-size: 35px; }
+  .previous-candidate { bottom: 5px; right: 0; font-size: 9px; }
+  .world-heading { padding-top: 22px; }
+  .world-kicker { font-size: 7px; }
+  .world-heading h2 { font-size: 13px; }
+  .motion-toggle { padding: 6px 9px; font-size: 9px; }
+  .world-stage { height: 340px; margin-top: -8px; }
+  #hero::before { height: 290px; }
+  .world-controls { margin-top: -12px; padding: 0 15px 18px; }
+  .world-hint { font-size: 10px; }
+  .world-buttons { gap: 5px; }
+  .world-buttons button { flex-direction: column; flex: 1; max-width: 84px; gap: 2px; min-height: 55px; padding: 6px 4px; border-radius: 12px; font-size: 9px; }
+  .world-buttons button span { font-size: 19px; }
+  .world-message { font-size: 10px; min-height: 38px; margin-top: 12px; }
+  .holiday-marquee { gap: 22px; font-size: 10px; padding-block: 12px; }
+  #works { padding: 40px 0 45px; }
+  #works .section-heading { margin-bottom: 29px; gap: 12px; }
+  #works .section-heading .eyebrow { font-size: 8px; }
+  .section-title { font-size: 23px; }
+  .work-group-heading { display: flex; flex-wrap: wrap; gap: 9px 12px; }
+  .work-group-title { margin: 0; font-size: 13px; }
+  .work-group-label, .work-group + .work-group .work-group-label { font-size: 10px; padding-inline: 10px; }
+  .works-grid { gap: 22px; }
+  .work-card .work-title { font-size: 14px; }
+  .work-cat { font-size: 10px; }
+  .work-desc { font-size: 12px; line-height: 1.75; }
+  .work-open { font-size: 11px; }
+  #points { padding: 40px 0 45px; }
+  .point-card, .point-card:nth-child(n) { padding: 22px; }
+  .footer-copy span { display: block; margin: 9px 0 0; }
+}
+@media (max-width: 380px) {
+  .hero-title { font-size: 10.2vw; }
+  .hero-tagline { font-size: 13px; }
+  .hero-copy .eyebrow { font-size: 7px; }
+  .hero-copy .btn { top: 390px; font-size: 10px; }
+  .hero-smallprint { top: 481px; }
+  .nav-link, .nav-link:first-child, .nav-link:nth-child(2) { padding-inline: 9px; font-size: 10px; }
+  .logo-img { width: 132px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .world-buttons button { transition: none; }
+}

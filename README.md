@@ -28,34 +28,51 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 | 12 | PDF Editor | https://aboshidaisuke.github.io/pdf-editor/ |
 | 13 | 飲み会 予算管理 | https://aboshidaisuke.github.io/BBQ/ |
 
-## 季節デザイン：クリスマス版（2026）
+## 季節デザイン：Christmas Toyland（2026）
 
-作業ブランチ：`christmas-2026`。深いグリーン、クリスマスレッド、アイボリーを使ったクリスマスマーケット風のデザインです。
+新しい候補は `christmas-toyland-2026` ブランチです。夜空、キャンディカラーの見出し、アニメ塗りのサンタ衣装のぐろちゃんと、Three.jsの雪の広場を組み合わせています。
 
-- 季節スタイル：`christmas.css`（共通の `style.css` の後に読み込み）
-- サンタ帽付きロゴ：`abs_mart_logo_christmas.svg`
-- サンタ姿のぐろちゃん：`hero_christmas_640.webp` / `hero_christmas_960.webp` / `hero_christmas_1536.webp`
-- JPEGフォールバック・OG/Twitter共有画像：`hero_christmas_1200.jpg`（1200 × 800）
-- 季節ファビコン：`favicon-christmas.svg`
-- 雪の演出：CSSアニメーション。`script.js` のボタンで停止・再開でき、`prefers-reduced-motion`・データセーバー使用時は無効です。
-- 作品13件の内容・リンクと、既存の転送ページは維持しています。
+- **新しい3D版**：`/`（ローカルでは http://127.0.0.1:8000/ ）
+- **最初の候補**：`/candidate-a/`（元の `christmas-2026` ブランチも保持）
+- **モデル**：サンタ、トナカイ、雪だるま、オーナメントと電飾付きツリー、リボン付きプレゼント。`christmas-models.js` で形状から制作しています。
+- **操作**：モデルをタップ、または下のボタンをクリック／キーボード操作。サンタの手振り、トナカイの首振り、雪だるまのリアクション、ツリーの星と照明、プレゼントの開閉を楽しめます。
+- **動作制御**：停止・再開ボタン、動きを減らす設定、データセーバー、画面外・バックグラウンドでのアニメーション停止に対応。WebGLが使えない場合は静的な広場と通常の作品一覧を表示します。
+- **画面サイズ**：スマホではモデルの配置も変更し、ツリーの後ろにほかの仲間が隠れないようにしています。
+- **依存**：[Three.js](https://threejs.org/) 0.180.0を `vendor/three/` に同梱。3D表示のための外部CDNアクセスは不要です。MITライセンスを同梱しています。
+- 作品13件の内容・リンクと既存の転送ページは維持しています。
 
-ハロウィンのCSS・3Dモデル・奥行き演出・画像は履歴用に残していますが、クリスマス版では読み込みません。ハロウィン前の状態には `pre-halloween-2026` タグがあります。
+### イラストと候補の保存
 
-### イラスト制作
+組み込みの imagegen ツールで、既存キャラクターを参照し、ポーズと塗り方を変えたアニメ塗りの透過立ち絵を制作しました。
 
-組み込みの imagegen ツールで、既存のハロウィン画像を参照してサンタ衣装とクリスマスマーケットの背景を生成しました。配信用画像は上記4ファイル、生成原本は `_src/christmas/hero_santa.png`（git管理対象外）です。生成プロンプトは末尾に記録しています。
+- 新イラスト：`santa_anime_480.webp` / `santa_anime_800.webp`（透過WebP）。原本：`_src/christmas/santa_anime.png`（git管理対象外）。
+- 前の候補：`hero_christmas_*.webp` / `hero_christmas_1200.jpg`、`christmas.css`、`abs_mart_logo_christmas.svg` を保存。`candidate-a/` から閲覧できます。
+- 新しいロゴ：`abs_mart_logo_toyland.svg`。共有用画像は最初の候補の `hero_christmas_1200.jpg` を引き続き使用しています。
+- 各生成プロンプトは末尾に記録しています。
+
+ハロウィンのCSS・3Dモデル・画像は履歴用に残していますが、現行ページでは読み込みません。
+
+### 確認
+
+JavaScriptの構文、13作品へのリンクとローカル画像参照、5種類の3Dモデル生成、320〜1380px幅のカメラ内への収まりを確認。モック描画環境で、プレゼント開閉、全キャラクターの操作、停止・再開、動きを減らす設定、データセーバー、WebGL障害時のフォールバック、コンテキスト復旧、ページ復帰・破棄を確認しています。ブラウザ連携が起動できず、新しい版の実ブラウザでの描画・目視確認は未実施です。
 
 ## ファイル構成
 
 ```
 index.html                     ページ本体
 style.css                      共通スタイル
-christmas.css                  クリスマス版の上書きスタイル
-script.js                      ナビ追従・出現アニメ・雪の停止切り替え
+toyland.css                    新しい3Dクリスマス版のスタイル
+christmas-models.js            サンタ・トナカイ・雪だるま・ツリー・ギフトの形状
+christmas-world.js             3D描画・操作・アニメーションの制御
+vendor/three/                  Three.js 0.180.0とMITライセンス
+santa_anime_*.webp             新しいアニメ塗りの透過サンタ立ち絵
+candidate-a/                   最初の候補の比較用ページ
+christmas.css                  最初の候補用のスタイル
+script.js                      ナビ追従・出現アニメ
 hero-depth.js                  旧ハロウィン版の立体視差（現在は未使用）
 favicon-christmas.svg          クリスマス版ファビコン
-abs_mart_logo_christmas.svg     クリスマス版ロゴ
+abs_mart_logo_toyland.svg       新しい3D版のロゴ
+abs_mart_logo_christmas.svg     最初の候補のロゴ
 hero_christmas_*               サンタのヒーロー画像・共有画像
 favicon.svg                    通常版ファビコン（保存）
 abs_mart_hero.mp4              ヒーロー動画（自動再生・ループ）
@@ -83,7 +100,7 @@ python3 -m http.server 8000
 ドメイン・DNS の設定は [DOMAIN_MANAGEMENT.md](DOMAIN_MANAGEMENT.md) を参照。
 
 <details>
-<summary>クリスマスイラストの生成プロンプト（組み込み imagegen）</summary>
+<summary>最初の候補のイラスト生成プロンプト（組み込み imagegen）</summary>
 
 ```text
 Use case: identity-preserve
@@ -94,6 +111,22 @@ Change her costume completely to a rich Christmas-red velvet Santa coat/dress wi
 Scene: snow-covered European Christmas market at blue hour, a magnificent evergreen Christmas tree with warm golden fairy lights, red and gold baubles, illuminated little wooden stalls, snowy rooftops, a few gently falling snowflakes. Warm and welcoming, luminous and richly illustrated.
 Composition: landscape 3:2 illustration, waist-up portrait, woman centered slightly right with entire Santa hat fully in frame and generous headroom. Her face and gift are the unmistakable focus. Background clearly visible around her. Site copy will be outside the image. No text, letters, logos, watermark or border.
 Palette: deep evergreen, cranberry red, ivory snow, warm metallic gold; softly glowing blue night sky. High quality clean anime line work, nuanced painted lighting. Remove all Halloween imagery.
+```
+
+</details>
+
+<details>
+<summary>新しいアニメ塗り立ち絵の生成プロンプト（組み込み imagegen）</summary>
+
+```text
+Use case: style-transfer
+Asset type: a transparent anime character cutout for a playful interactive Christmas website.
+Input image 1: character identity reference only. Make a NEW illustration and NEW pose, not a recolor of this scene.
+Subject: the same adult gyaru mascot with tan skin, blonde hair with pastel-pink tips, two turquoise hair clips, lively eyes, heart earrings, cheerful confident personality.
+Style: authentic Japanese TV anime CEL SHADING / アニメ塗り. Crisp clean dark linework, solid flat base colors, exactly one or two hard-edged shadow shapes per material, simple small hard highlights. Vibrant red, cream white, emerald accents. No painterly rendering, no soft airbrushing, no realistic glossy skin, no elaborate gradients, no photographic lighting. Appeal of a polished anime character key visual.
+Outfit: cute red Santa mini coat dress with fluffy white cuffs and white hem, a closed high white fur collar, black belt with a gold square buckle, red floppy Santa hat, warm dark tights and red winter boots. Festive and stylish, fully dressed.
+Pose: FULL BODY, dynamic three-quarter view, standing with weight on one leg and the other boot lifted playfully behind. One hand raised in a cheerful wave, the other arm hugging a big mint-green present with a bright golden ribbon. Hair flows gently to the side, happy open smile. Entire body, hat, raised hand and boots must fit with 7% transparent padding all around.
+Background: completely transparent alpha, no background, no snow, no floor, no cast ground shadow, no scene, no other characters. Isolated character and the gift only. Portrait 2:3 framing. No text, no logos, no watermark.
 ```
 
 </details>
