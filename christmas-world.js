@@ -21,7 +21,7 @@ function showFallback(error) {
 async function initWorld() {
   const [T, { createChristmasModels }] = await Promise.all([
     import('./vendor/three/three.module.min.js'),
-    import('./christmas-models.js'),
+    import('./christmas-models.js?v=compact'),
   ]);
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
@@ -84,11 +84,13 @@ async function initWorld() {
     if (destroyed || contextLost) return;
     const { width, height } = stage.getBoundingClientRect();
     if (!width || !height) return;
-    const nextNarrow = width < 700;
+    const nextNarrow = width / height < 2.4;
     narrow = nextNarrow;
     models.layout(narrow);
-    treeLight.position.set(narrow ? 0 : .45, 3.8, narrow ? -1.7 : .4);
-    const viewHeight = narrow ? 8.2 : Math.max(6.8, 20 / (width / height));
+    treeLight.position.set(narrow ? .1 : .2, 3.3, narrow ? -.3 : .4);
+    const viewHeight = narrow
+      ? Math.max(6.4, 10.4 / (width / height))
+      : Math.max(5.6, 18.4 / (width / height));
     const halfWidth = viewHeight * width / height / 2;
     Object.assign(camera, { left: -halfWidth, right: halfWidth, top: viewHeight / 2, bottom: -viewHeight / 2 });
     camera.updateProjectionMatrix();

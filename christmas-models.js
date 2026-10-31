@@ -215,6 +215,8 @@ export function createChristmasModels(T) {
 
   const root = group(null, 'christmas-toyland');
   const actors = { santa: santa(), reindeer: reindeer(), tree: tree(), snowman: snowman(), gift: gift('red', 'gold', 1.16) };
+  // Keep the star inside a compact stage while the other toys stay prominent.
+  actors.tree.scale.setScalar(.86);
   for (const [id, actor] of Object.entries(actors)) {
     actor.userData.character = id; root.add(actor);
     // A soft contact shadow grounds each toy without a postprocessing pass.
@@ -237,8 +239,8 @@ export function createChristmasModels(T) {
     g.position.set(5.3 + i * .8, 0, -.9); g.rotation.y = i * .4; extraGifts.add(g);
   }
   const positions = {
-    wide: { santa: [-5.8, 0, .35], reindeer: [-2.65, 0, .25], tree: [.45, 0, -.4], snowman: [3.5, 0, .3], gift: [6.2, 0, .8] },
-    narrow: { santa: [-2.55, 0, .05], reindeer: [-1.25, 0, 2.1], tree: [0, 0, -2.1], snowman: [2.4, 0, .05], gift: [1.2, 0, 2.15] },
+    wide: { santa: [-7.2, 0, .35], reindeer: [-3.5, 0, .25], tree: [.2, 0, -.4], snowman: [4, 0, .3], gift: [7.4, 0, .8] },
+    narrow: { santa: [-3.3, 0, 0], reindeer: [-1.5, 0, 1.05], tree: [.1, 0, -.7], snowman: [2.3, 0, .1], gift: [3.7, 0, 1.1] },
   };
   function layout(narrow) {
     for (const [id, pos] of Object.entries(positions[narrow ? 'narrow' : 'wide'])) {
