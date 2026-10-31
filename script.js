@@ -39,26 +39,6 @@ if (!prefersReducedMotion.matches && "IntersectionObserver" in window) {
   revealEls.forEach((el) => el.classList.add("is-revealed"));
 }
 
-// Keep the original portrait intact; align the separate hand to its cover-scaled pixels.
-const santaArt = document.querySelector('.santa-art');
-const santaPeace = document.querySelector('.santa-peace');
-if (santaArt && santaPeace) {
-  const placePeaceHand = () => {
-    const { width, height } = santaArt.getBoundingClientRect();
-    if (!width || !height) return;
-    const compact = window.matchMedia('(max-width: 760px)').matches;
-    const portraitSize = Math.max(width, height);
-    const cropOffset = (width - portraitSize) * (compact ? .55 : .5);
-    santaPeace.style.width = `${portraitSize * (compact ? .4 : .42)}px`;
-    santaPeace.style.left = `${cropOffset + portraitSize * (compact ? .1 : 0)}px`;
-    santaPeace.style.top = `${portraitSize * (compact ? .24 : .2)}px`;
-    santaPeace.hidden = false;
-  };
-  placePeaceHand();
-  if ('ResizeObserver' in window) new ResizeObserver(placePeaceHand).observe(santaArt);
-  else window.addEventListener('resize', placePeaceHand);
-}
-
 // One control for the snowfall, garland, and 3D toys, including WebGL fallback.
 const holidayHero = document.getElementById('hero');
 const holidayToggle = document.querySelector('.motion-toggle');

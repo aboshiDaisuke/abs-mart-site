@@ -78,9 +78,8 @@ body { background: var(--paper); background-image: none; }
 .hero-copy .btn:hover, .hero-copy .btn:focus-visible { box-shadow: 0 7px 0 #9d2039; transform: translateY(-2px); }
 .hero-smallprint { margin-top: 9px; color: #a7c9c7; font-size: 9px; }
 .hero-smallprint span { margin-inline: 8px; color: #ffd987; }
-.santa-art { position: absolute; top: 0; right: -24px; bottom: 45px; z-index: 2; width: 57%; pointer-events: none; overflow: visible; }
+.santa-art { position: absolute; top: 0; right: -24px; bottom: 45px; z-index: 2; width: 57%; pointer-events: none; overflow: hidden; }
 .santa-art img { position: absolute; inset: 0; z-index: 2; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; }
-.santa-art .santa-peace { inset: auto; z-index: 3; width: 42%; height: auto; max-width: none; object-fit: contain; }
 .art-orbit { position: absolute; top: 10%; left: -1%; width: 99%; aspect-ratio: 1; border: 1px solid #89dfcb50; border-radius: 50%; background: radial-gradient(circle, #64bba34a, #78ebd011 65%, transparent 66%); }
 .art-orbit::before { content: ""; position: absolute; inset: 16px; border: 1px dashed #a7ebd844; border-radius: 50%; }
 .santa-bubble { position: absolute; top: 16px; right: -6px; z-index: 3; padding: 12px 18px; border: 2px solid #fff2cb; border-radius: 50% 50% 50% 6px; background: #fff9df; color: #cf2446; font-size: 12px; font-weight: 800; transform: rotate(9deg); box-shadow: 3px 4px 0 #006a62; }
