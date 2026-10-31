@@ -150,6 +150,28 @@ DOMAIN_MANAGEMENT.md           ドメイン管理メモ
 _src/                          画像の原本（AI生成ソース・gitignore）
 ```
 
+## 過去バージョンの保存
+
+本番公開用の `main` と別に、各デザインの状態を固定したタグをGitHubに保存しています。タグには、その時点のHTML・CSS・JavaScript・公開用画像が含まれます。作業ブランチが進んだり削除されたりしても、タグから当時の版を取り出せます。
+
+| バージョン | 保存タグ | 内容 |
+|---|---|---|
+| 通常版 | `pre-halloween-2026` | ハロウィン化する前のギャル版 |
+| ハロウィン版 | `archive/halloween-2026` | クリスマス化する直前の版。立体視差と13作品の一覧を含む |
+| クリスマス初期案 | `archive/christmas-candidate-2026` | クリスマスマーケットを背景にした最初の案 |
+| クリスマス3D版 | `archive/christmas-toyland-2026` | サンタたちの雪の広場。ぐろちゃんは静止画、カード画像のホバー拡大なし |
+
+現在の作業場所を切り替えずに、例えばハロウィン版を別フォルダで確認できます。
+
+```sh
+git fetch origin --tags
+git worktree add --detach ../abs-mart-halloween refs/tags/archive/halloween-2026
+python3 -m http.server 8001 --bind 127.0.0.1 --directory ../abs-mart-halloween
+# → http://127.0.0.1:8001/
+```
+
+タグは保存時点の記録として保持し、今後の完成版は別名のタグを追加します。保存用タグの追加だけで本番の表示を切り替えることはありません。
+
 ## 開発・確認
 
 ビルド不要。ローカル確認は任意の静的サーバーで：
