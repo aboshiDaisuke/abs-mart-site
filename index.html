@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js');</script>
+  <script>(function(){var r=document.documentElement,f=/[?&]splash\b/.test(location.search),k='abs-splash-xmas-2026',seen=false;try{seen=sessionStorage.getItem(k)==='1'}catch(e){}var calm=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches,save=navigator.connection&&navigator.connection.saveData;if(f||(!seen&&!calm&&!save&&!location.hash&&!document.hidden)){r.classList.add('splash-on','splash-lock');try{sessionStorage.setItem(k,'1')}catch(e){}setTimeout(function(){r.classList.remove('splash-on','splash-lock')},16500)}})();</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ABS Mart｜遊べるクリスマス・トイランド</title>
   <meta name="description" content="遊べる・使える無料のゲーム＆ツール集。鮨ネタクイズ、シューティング、3Dカートレース、夜桜散策、神様占いから、あみだくじ、AI音声の聴きくらべ、ずんだもん動画キット、字幕変換、MP3結合、PDF編集、予算管理まで。" />
@@ -30,7 +31,9 @@
   <link rel="preload" as="image" href="abs_mart_logo_toyland.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&amp;family=M+PLUS+Rounded+1c:wght@400;500;700;800&amp;family=Rowdies:wght@700&amp;family=Yomogi&amp;display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css?v=20261011-left" />
-  <link rel="stylesheet" href="toyland.css?v=20261101-static-thumbnails" />
+  <link rel="stylesheet" href="toyland.css?v=20261101-mobile-footer2" />
+  <link rel="stylesheet" href="splash.css?v=20261101-splash3" />
+  <link rel="modulepreload" href="vendor/three/three.module.min.js" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -165,6 +168,14 @@
   </script>
 </head>
 <body>
+  <div id="splash" class="splash">
+    <div class="splash-stage" aria-hidden="true"></div>
+    <div class="splash-brand" aria-hidden="true">
+      <img src="abs_mart_logo_toyland.svg" alt="" width="280" height="76" decoding="async" />
+      <p lang="en">CHRISTMAS TOYLAND</p>
+    </div>
+    <button type="button" class="splash-skip">スキップ</button>
+  </div>
   <a class="skip-link" href="#main">本文へスキップ</a>
   <nav id="navbar" aria-label="Primary">
     <div class="nav-inner">
@@ -208,7 +219,7 @@
             <span class="art-star art-star-one" aria-hidden="true">✦</span><span class="art-star art-star-two" aria-hidden="true">✧</span>
           </div>
       <div id="christmas-world" class="christmas-world" aria-labelledby="world-title">
-        <div class="world-heading"><div><p class="world-kicker">WELCOME TO THE TOYLAND</p><h2 id="world-title">サンタと仲間たちの広場</h2></div><button class="motion-toggle" type="button" aria-pressed="false" hidden><span aria-hidden="true">Ⅱ</span> 動きを止める</button></div>
+        <div class="world-heading"><div><p class="world-kicker">WELCOME TO THE TOYLAND</p><h2 id="world-title">サンタと仲間たちの広場</h2></div></div>
         <div class="world-stage" id="world-stage">
           <div class="world-fallback" role="img" aria-label="サンタ、トナカイ、雪だるま、クリスマスツリーとプレゼントが並ぶ雪の広場">
             <span>🎅</span><span>🦌</span><span class="fallback-tree">🎄</span><span>☃️</span><span>🎁</span>
@@ -226,6 +237,7 @@
           </div>
           <p class="world-message" role="status" aria-live="polite">みんな、クリスマスの準備はばっちり！</p>
         </div>
+        <div class="world-motion"><button class="motion-toggle" type="button" aria-pressed="false" hidden><span aria-hidden="true">Ⅱ</span> 動きを止める</button></div>
       </div>
       </div>
     </section>
@@ -237,7 +249,7 @@
       <div class="section-inner">
         <div class="section-heading" data-reveal>
           <p class="eyebrow" lang="en">CHOOSE YOUR PRESENT <span aria-hidden="true">✦</span> 13 GAMES &amp; TOOLS</p>
-          <h2 class="section-title">どれから開ける？遊びのプレゼント。</h2>
+          <h2 class="section-title">どれから開ける？<br class="title-break" />遊びのプレゼント。</h2>
         </div>
 
         <div class="work-group">
@@ -509,7 +521,6 @@
       <nav class="footer-nav" aria-label="Footer">
         <a href="#works">ゲーム＆ツール</a>
         <a href="#points">特長</a>
-        <a href="candidate-a/">前のデザインを見る</a>
         <a href="https://abs-mart.net/" target="_blank" rel="noopener noreferrer">abs-mart.net</a>
       </nav>
       <p class="footer-copy">Merry Christmas &amp; happy creating. <span>ABS Mart © 2026</span></p>
@@ -522,6 +533,7 @@
   </a>
 
   <script src="script.js?v=20261101-restore-portrait"></script>
+  <script type="module" src="splash.js?v=20261101-splash3"></script>
   <script type="module" src="christmas-world.js?v=20261101-craft-v2"></script>
 </body>
 </html>

@@ -1,0 +1,48 @@
+/* Christmas opening splash (splash.js). Hidden unless the inline check in <head> adds .splash-on. */
+.splash { display: none; }
+.splash-lock, .splash-lock body { overflow: hidden; }
+.splash-on .splash {
+  position: fixed; inset: 0; z-index: 1000; display: block; overflow: hidden; cursor: pointer;
+  background: radial-gradient(ellipse 80% 70% at 50% 36%, #1b5868 0%, #123349 46%, #091827 100%);
+  transition: opacity .9s ease, visibility 0s linear .9s;
+  /* Fail-safe: never cover the page for long, even if scripts stall. */
+  animation: splash-failsafe .4s ease 16s forwards;
+}
+.splash-stage, .splash-stage canvas { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.splash-stage { transition: transform 1s ease; }
+
+.splash-brand {
+  position: absolute; left: 50%; bottom: max(10vh, 64px); width: max-content; max-width: calc(100% - 32px);
+  text-align: center; pointer-events: none; opacity: 0;
+  transform: translate(-50%, 16px) scale(.92);
+  transition: opacity .6s ease, transform .9s cubic-bezier(.2, 1.5, .4, 1);
+}
+/* The logo's sparkle sits far right; nudge so the wordmark reads centered. */
+.splash-brand img { display: block; width: min(70vw, 340px); height: auto; margin: 0 auto; translate: 5% 0; filter: drop-shadow(0 0 20px #ffcf6d55); }
+.splash-brand p {
+  margin: 8px 0 0; padding-left: .4em; color: #ffe18a;
+  font: 700 clamp(10px, 1.5vw, 13px)/1 var(--font-display, sans-serif); letter-spacing: .4em;
+  text-shadow: 0 0 12px #ffb73b88;
+}
+.splash.is-titled .splash-brand, .splash.is-static .splash-brand { opacity: 1; transform: translate(-50%, 0) scale(1); }
+
+.splash-skip {
+  position: absolute; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom));
+  padding: 8px 14px; border: 1px solid #ffffff38; border-radius: 999px; color: #e7f4f2; background: #ffffff10;
+  font: 700 12px/1 var(--font-body, sans-serif); letter-spacing: .08em; cursor: pointer;
+  backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+}
+.splash-skip:hover, .splash-skip:focus-visible { background: #ffffff24; }
+.splash.is-titled .splash-skip { border-color: #ffe18a88; color: #fff3cf; background: #ffe18a1c; }
+
+/* Exit: title and button fade first while the tree scatters, then the whole overlay fades. */
+.splash.is-exiting { pointer-events: none; }
+.splash.is-exiting .splash-brand { opacity: 0; transform: translate(-50%, -10px) scale(1.02); transition: opacity .6s ease, transform .9s ease; }
+.splash.is-exiting .splash-skip { opacity: 0; transition: opacity .3s ease; }
+.splash.is-leaving { opacity: 0; visibility: hidden; }
+.splash.is-leaving .splash-stage { transform: scale(1.04); }
+
+@keyframes splash-failsafe { to { opacity: 0; visibility: hidden; pointer-events: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .splash-stage, .splash-brand { transition: none; }
+}

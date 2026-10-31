@@ -95,8 +95,10 @@ body { background: var(--paper); background-image: none; }
 .world-heading > div { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .world-kicker { display: none; font-size: 8px; color: #b5dfd8; letter-spacing: .18em; font-weight: 800; }
 .world-heading h2 { margin-top: 4px; color: #fff7e3; font-size: 12px; font-weight: 800; }
-.motion-toggle { padding: 7px 13px; min-height: 35px; border: 1px solid #bbdcd570; border-radius: 20px; background: #123749; color: #e8f4e8; font: 700 10px var(--font-body); cursor: pointer; }
-.motion-toggle:hover { background: #255b69; }
+/* Sits on the snow under the stage, clear of the illustration, and stays usable without WebGL. */
+.world-motion { position: relative; z-index: 3; display: flex; justify-content: center; padding: 2px 16px 14px; }
+.motion-toggle { padding: 6px 14px; min-height: 32px; border: 1px solid #b0cec2; border-radius: 20px; background: #fffdf4; color: #3c6659; font: 700 10px var(--font-body); cursor: pointer; }
+.motion-toggle:hover, .motion-toggle:focus-visible { background: #ffefc3; }
 .world-stage { position: relative; height: var(--stage-height); margin: 0; }
 .world-stage canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; }
 .world-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: clamp(12px, 4vw, 60px); padding-bottom: 55px; font-size: clamp(38px, 6vw, 85px); }
@@ -174,12 +176,12 @@ body { background: var(--paper); background-image: none; }
   .nav-actions { gap: 7px; }
   .nav-link, .nav-link:first-child, .nav-link:nth-child(2) { padding: 7px 11px; font-size: 11px; }
   .nav-full { display: none; } .nav-short { display: inline; }
-  #hero { padding-top: calc(var(--nav-h) + 24px); }
+  #hero { padding-top: calc(var(--nav-h) + 44px); }
   .hero-inner { width: min(570px, calc(100% - 32px)); }
   .hero-copy {
     display: grid; width: 100%; padding: 0;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas: "eyebrow eyebrow" "title title" "tagline tagline" "lead lead" "action smallprint";
+    grid-template-areas: "eyebrow eyebrow" "title title" "tagline tagline" "lead lead" "action action" "smallprint smallprint";
     column-gap: 12px; row-gap: 8px; align-items: center; text-align: center;
   }
   .hero-copy .eyebrow { grid-area: eyebrow; justify-content: center; font-size: 8px; letter-spacing: .035em; gap: 7px; }
@@ -192,10 +194,9 @@ body { background: var(--paper); background-image: none; }
   .hero-tagline br { display: none; }
   .hero-tagline strong { display: block; }
   .hero-lead { text-shadow: 0 2px 6px #102b40; grid-area: lead; margin: 0; padding: 0; width: auto; font-size: 11px; line-height: 1.8; }
-  .hero-copy .btn { grid-area: action; justify-self: start; width: 100%; margin: 0; min-height: 43px; padding: 8px 6px; border-radius: 11px; font-size: 10px; line-height: 1.5; gap: 3px; }
-  .hero-copy .btn > span:first-child { display: none; }
-  .hero-smallprint { text-shadow: 0 1px 5px #102b40; grid-area: smallprint; margin: 0; align-self: center; font-size: 8px; text-align: center; line-height: 1.8; }
-  .hero-smallprint span { display: block; height: 1px; font-size: 0; }
+  .hero-copy .btn { grid-area: action; justify-self: center; width: min(100%, 260px); margin: 6px 0 0; min-height: 46px; padding: 8px 18px; border-radius: 12px; font-size: 13px; line-height: 1.5; gap: 6px; }
+  .hero-smallprint { text-shadow: 0 1px 5px #102b40; grid-area: smallprint; margin: 2px 0 0; font-size: 10px; text-align: center; line-height: 1.8; }
+  .hero-smallprint span { margin-inline: 6px; }
   /* Keep the whole gesture visible, with copy above it and the snow in front. */
   .santa-art { position: relative; top: auto; right: auto; bottom: auto; width: min(100%, 420px); aspect-ratio: 1; height: auto; margin: 8px auto 0; }
   .santa-art img { object-fit: contain; object-position: 50% 0; }
@@ -203,9 +204,8 @@ body { background: var(--paper); background-image: none; }
   .art-star-one { left: 0; top: 20px; font-size: 21px; }
   .art-star-two { right: 0; font-size: 27px; }
   .christmas-world { --stage-height: clamp(220px, 60vw, 280px); width: calc(100% + 32px); margin: calc(var(--stage-height) * -.7) -16px 0; }
-  .world-heading { right: 0; top: 8px; }
   .world-heading h2 { margin: 0; font-size: 10px; }
-  .motion-toggle { min-height: 29px; padding: 5px 8px; font-size: 9px; }
+  .motion-toggle { min-height: 32px; padding: 5px 12px; font-size: 10px; }
   .world-stage { margin: 0; }
   .world-controls { margin-top: -36px; padding: 0 12px 8px; }
   .world-buttons { gap: 4px; }
@@ -228,12 +228,15 @@ body { background: var(--paper); background-image: none; }
   #points { padding: 30px 0; }
   .point-card, .point-card:nth-child(n) { padding: 22px; }
   .footer-copy span { display: block; margin: 9px 0 0; }
+  .footer-nav { justify-content: center; gap: 10px 22px; }
+  #footer { padding-bottom: 84px; } /* clear the floating TOP button */
+  .footer-brand .logo-img { translate: 5% 0; } /* the logo's sparkle sits far right */
 }
 @media (max-width: 380px) {
   .hero-title { font-size: 9.6vw; }
   .hero-tagline { font-size: 12px; }
   .hero-copy .eyebrow { font-size: 7px; }
-  .hero-copy .btn { font-size: 9px; }
+  .hero-copy .btn { font-size: 12px; }
   .nav-link, .nav-link:first-child, .nav-link:nth-child(2) { padding-inline: 9px; font-size: 10px; }
   .logo-img { width: 132px; }
   .world-buttons button { flex-direction: column; gap: 0; min-height: 42px; }
