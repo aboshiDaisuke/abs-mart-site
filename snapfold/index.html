@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snapfold｜写真を並べて、まとめてリネームできるMacアプリ｜ABS Mart</title>
+  <meta name="description" content="Snapfold は、写真のサムネイルを見ながら並べ替えて、連番でまとめてリネームし、フォルダ分けまでできる無料の Mac アプリ。ターミナルに1行貼るだけでインストールできます。" />
+  <link rel="canonical" href="https://abs-mart.net/snapfold/" />
+  <meta name="theme-color" content="#163b39" />
+  <meta property="og:title" content="Snapfold｜写真を並べて、まとめてリネームできるMacアプリ" />
+  <meta property="og:description" content="写真を見ながら並べ替えて、連番でまとめてリネーム。ターミナルに1行貼るだけでインストールできる無料の Mac アプリ。" />
+  <meta property="og:image" content="https://abs-mart.net/work_snapfold_generated.jpg" />
+  <meta property="og:image:width" content="1100" />
+  <meta property="og:image:height" content="619" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://abs-mart.net/snapfold/" />
+  <meta property="og:site_name" content="ABS Mart" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&amp;family=Rowdies:wght@700&amp;display=swap" rel="stylesheet" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Snapfold",
+    "url": "https://abs-mart.net/snapfold/",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "macOS",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+  }
+  </script>
+  <style>
+    :root {
+      --paper: #f0faf4;
+      --surface: #fffef7;
+      --ink: #163b39;
+      --text: #234843;
+      --muted: #536e67;
+      --accent: #d9481c;
+      --accent-soft: #fff4ef;
+      --green: #00856b;
+      --line: #cfe6dc;
+      --font-display: "Rowdies", "M PLUS Rounded 1c", sans-serif;
+      --font-body: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green); }
+    :focus-visible { outline: 3px solid #ffbe3b; outline-offset: 4px; }
+
+    .bar {
+      position: sticky; top: 0; z-index: 5;
+      background: #102b40ee;
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .bar-inner {
+      width: min(960px, calc(100% - 40px)); margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    .bar a {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: #fffbe9; text-decoration: none; font-weight: 800; font-size: 14px;
+    }
+    .bar a svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+    .bar .brand { font-family: var(--font-display); font-size: 18px; letter-spacing: .02em; }
+
+    main { width: min(960px, calc(100% - 40px)); margin: 0 auto; padding: 36px 0 72px; }
+
+    .hero-img {
+      display: block; width: 100%; height: auto; aspect-ratio: 1100 / 619;
+      border: 4px solid #fff; border-radius: 14px;
+      box-shadow: 0 16px 32px rgba(22, 59, 57, .14);
+      background: #fff;
+    }
+    .hero-text { margin-top: 28px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 10px; padding: 0; list-style: none; }
+    .tags li {
+      padding: 2px 12px; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 13px; font-weight: 800;
+    }
+    h1 {
+      margin: 0; color: var(--ink);
+      font-family: var(--font-display); font-size: clamp(2.4rem, 6vw, 3.4rem); line-height: 1.15;
+    }
+    .lead { margin: 12px 0 0; font-size: 1.08rem; font-weight: 500; }
+
+    section { margin-top: 56px; }
+    h2 {
+      margin: 0 0 18px; color: var(--ink);
+      font-size: clamp(1.35rem, 3.4vw, 1.7rem); font-weight: 800; line-height: 1.4;
+    }
+    h2 small { display: block; color: var(--accent); font-family: var(--font-display); font-size: .8rem; letter-spacing: .12em; }
+
+    .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .feature {
+      padding: 18px 18px 16px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--line);
+    }
+    .feature h3 { margin: 0 0 6px; color: var(--ink); font-size: 1.02rem; font-weight: 800; }
+    .feature p { margin: 0; font-size: .94rem; color: var(--muted); }
+
+    .steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .steps > li {
+      position: relative; padding: 18px 20px 18px 64px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--line);
+      counter-increment: step;
+    }
+    .steps > li::before {
+      content: counter(step);
+      position: absolute; left: 18px; top: 16px;
+      width: 32px; height: 32px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: var(--accent); color: #fff; font-weight: 800;
+    }
+    .steps strong { color: var(--ink); }
+    .steps p { margin: 4px 0 0; color: var(--muted); font-size: .94rem; }
+    kbd {
+      padding: 1px 7px; border: 1px solid #b9d3c8; border-bottom-width: 2px; border-radius: 6px;
+      background: #fff; font-family: var(--font-body); font-size: .88em;
+    }
+
+    .command {
+      display: flex; align-items: stretch; gap: 0; margin-top: 12px;
+      border-radius: 12px; overflow: hidden;
+      background: #102b40; box-shadow: 0 8px 18px rgba(16, 43, 64, .18);
+    }
+    .command code {
+      flex: 1; min-width: 0; padding: 14px 16px;
+      color: #e9fff6; font-family: var(--font-mono); font-size: .92rem; line-height: 1.6;
+      overflow-x: auto; white-space: nowrap;
+    }
+    .copy {
+      flex: none; display: inline-flex; align-items: center; gap: 6px;
+      padding: 0 18px; border: 0; cursor: pointer;
+      background: var(--accent); color: #fff;
+      font-family: var(--font-body); font-size: .95rem; font-weight: 800;
+      transition: background .15s;
+    }
+    .copy:hover { background: #bf3a12; }
+    .copy svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .copy.is-done { background: var(--green); }
+
+    .notes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+    .note {
+      padding: 16px 18px; border-radius: 14px;
+      background: var(--surface); border: 1px solid var(--line);
+    }
+    .note h3 { margin: 0 0 4px; color: var(--ink); font-size: 1rem; font-weight: 800; }
+    .note p { margin: 0; font-size: .93rem; color: var(--muted); }
+
+    footer { margin-top: 64px; text-align: center; font-size: .9rem; color: var(--muted); }
+
+    @media (max-width: 720px) {
+      main { padding-top: 20px; }
+      .features, .notes { grid-template-columns: 1fr; }
+      .steps > li { padding: 16px 16px 16px 58px; }
+      .steps > li::before { left: 14px; }
+      .command { flex-direction: column; }
+      .copy { justify-content: center; padding: 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .copy { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="bar-inner">
+      <a class="brand" href="../">ABS Mart</a>
+      <a href="../#works"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>ほかの作品を見る</a>
+    </div>
+  </header>
+
+  <main>
+    <img class="hero-img" src="../work_snapfold_generated.jpg" alt="大きなアプリ画面のふちに座ったギャルが、並んだ写真のサムネイルを指でドラッグして並べ替えるSnapfoldのイメージビジュアル" width="1100" height="619" />
+
+    <div class="hero-text">
+      <ul class="tags">
+        <li>Mac アプリ</li>
+        <li>無料</li>
+        <li>M1 以降の Mac</li>
+      </ul>
+      <h1>Snapfold</h1>
+      <p class="lead">写真のサムネイルを見ながら並べ替えて、連番でまとめてリネーム。フォルダ分けまで一気にできる Mac アプリ。</p>
+    </div>
+
+    <section aria-labelledby="features-title">
+      <h2 id="features-title"><small lang="en">FEATURES</small>できること</h2>
+      <div class="features">
+        <div class="feature">
+          <h3>ドラッグで並べ替え</h3>
+          <p>サムネイルを見ながら、写真をつかんで好きな順番に。</p>
+        </div>
+        <div class="feature">
+          <h3>連番で名前をつける</h3>
+          <p>並べた順のまま、まとめて連番のファイル名に。</p>
+        </div>
+        <div class="feature">
+          <h3>フォルダにまとめる</h3>
+          <p>名前を付けた写真を、そのままフォルダに整理。</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="install-title">
+      <h2 id="install-title"><small lang="en">INSTALL</small>インストール方法</h2>
+      <ol class="steps">
+        <li>
+          <strong>「ターミナル」を開く</strong>
+          <p><kbd>command</kbd> + <kbd>スペース</kbd> を押して「ターミナル」と入力し、<kbd>return</kbd> を押します。</p>
+        </li>
+        <li>
+          <strong>下の1行をコピーして、ターミナルに貼り付けて <kbd>return</kbd></strong>
+          <div class="command">
+            <code id="install-command">curl -fsSL https://apps.abs-mart.net/install.sh | bash -s snapfold</code>
+            <button class="copy" type="button" data-copy="install-command">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+              <span>コピー</span>
+            </button>
+          </div>
+        </li>
+        <li>
+          <strong>1分ほど待つと Snapfold が起動</strong>
+          <p>アプリは「アプリケーション」フォルダに入ります。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="notes-title">
+      <h2 id="notes-title"><small lang="en">NOTES</small>知っておくと安心</h2>
+      <div class="notes">
+        <div class="note">
+          <h3>更新するとき</h3>
+          <p>新しい版が出たら、同じ1行をもう一度実行するだけ。設定はそのまま残ります。</p>
+        </div>
+        <div class="note">
+          <h3>パスワードを聞かれたら</h3>
+          <p>Mac にログインするときのパスワードを入れて <kbd>return</kbd>。入力中は文字が表示されませんが、そのままで大丈夫です。</p>
+        </div>
+        <div class="note">
+          <h3>対応する Mac</h3>
+          <p>M1 以降の Mac（Apple シリコン）。Intel の Mac には対応していません。</p>
+        </div>
+        <div class="note">
+          <h3>アンインストール</h3>
+          <p>「アプリケーション」フォルダの Snapfold をゴミ箱に入れるだけです。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <a href="../">ABS Mart のトップへ戻る</a>
+    </footer>
+  </main>
+
+  <script>
+    document.querySelectorAll('.copy').forEach(function (btn) {
+      var label = btn.querySelector('span');
+      btn.addEventListener('click', function () {
+        var text = document.getElementById(btn.dataset.copy).textContent.trim();
+        var done = function () {
+          label.textContent = 'コピーしました';
+          btn.classList.add('is-done');
+          setTimeout(function () { label.textContent = 'コピー'; btn.classList.remove('is-done'); }, 2000);
+        };
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(done, fallback);
+        } else {
+          fallback();
+        }
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); done(); } catch (e) {}
+          ta.remove();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

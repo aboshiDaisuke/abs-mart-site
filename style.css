@@ -1049,6 +1049,11 @@ dd {
   background: #fff5f5;
 }
 
+.work-icon-snapfold {
+  color: #d9481c;
+  background: #fff4ef;
+}
+
 .work-icon-racing {
   color: #e2453a;
   background: #fff5ef;
@@ -1157,6 +1162,10 @@ dd {
 
 .work-card-pdf .work-open {
   color: #d71920;
+}
+
+.work-card-snapfold .work-open {
+  color: #d9481c;
 }
 
 .work-card-zundamon .work-open {
