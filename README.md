@@ -37,7 +37,7 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 雪の地面は厚みのある円形台座から、画面の下端を越えて続く雪原に変更しています。3Dの雪面と操作ボタンの背景を同じ色でつなぎ、下の赤い帯まで隙間が出ない構成です。影は別の受け面で描画し、雪面自体の色は照明や露出で変えません。
 
 - **新しい3D版**：`/`（ローカルでは http://127.0.0.1:8000/ ）
-- **最初の候補**：`/candidate-a/`（保存タグ `archive/christmas-candidate-2026` にも保持）
+- **最初の候補**：保存タグ `archive/christmas-candidate-2026` に保持（公開していた `/candidate-a/` は 2026-11-23 に撤去）
 - **モデル**：サンタ、トナカイ、雪だるま、オーナメントと電飾付きツリー、リボン付きプレゼント。`christmas-models.js` と `christmas-props.js` で形状から制作しています。
 - **ツリーの細部**：枝先に凹凸を付けた7層の葉、630束の枝葉、枝に沿った雪、61灯の電飾、金具と吊り紐を持つ17個のオーナメント、キャンディケイン、面ごとに光を反射する星。枝葉・雪・電球はインスタンス描画でまとめています。
 - **プレゼントの細部**：角を丸めた箱と蓋、厚みのある側面、内張り、雪の結晶柄の包装紙、幅とねじれのあるサテンのリボン、結び目・垂れる端・タグ。開くと箱の内側と回転する星が見えます。
@@ -60,7 +60,7 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 - 前のバストアップ：`santa_bust_full.webp` / `santa_bust_640.webp` / `santa_bust_960.webp` を保存。原本：`_src/christmas/santa_bust_v2.png`（git管理対象外）。今回の顔・髪・衣装の参照元です。
 - 不採用の手の重ね合わせ案：`santa_peace_hand_full.webp` / `santa_peace_hand_640.webp`。原本：`_src/christmas/santa_peace_hand.png`（git管理対象外）。元絵の下がった腕とつながらず不自然だったため、ページから手の表示と位置調整処理を撤去しました。素材は履歴用に保存し、現行ページでは読み込みません。
 - 前の全身イラスト：`santa_anime_480.webp` / `santa_anime_800.webp` を候補として保存。原本：`_src/christmas/santa_anime.png`（git管理対象外）。
-- 前の候補：`hero_christmas_*.webp` / `hero_christmas_1200.jpg`、`christmas.css`、`abs_mart_logo_christmas.svg` を保存。`candidate-a/` から閲覧できます。
+- 前の候補：`hero_christmas_*.webp` / `hero_christmas_1200.jpg`、`christmas.css`、`abs_mart_logo_christmas.svg` を保存。
 - 新しいロゴ：`abs_mart_logo_toyland.svg`。共有用画像は最初の候補の `hero_christmas_1200.jpg` を引き続き使用しています。
 - 各生成プロンプトは末尾に記録しています。
 
@@ -134,7 +134,6 @@ santa_peace_{640,960,full}.webp 前のピース姿（保存）
 santa_bust_*.webp              前のバストアップ（保存）
 santa_peace_hand_*.webp        不採用の手の重ね合わせ案（未使用）
 santa_anime_*.webp             前の全身イラスト（保存）
-candidate-a/                   最初の候補の比較用ページ
 christmas.css                  最初の候補用のスタイル
 script.js                      ナビ追従・出現アニメ・雪と電飾の停止制御
 hero-depth.js                  旧ハロウィン版の立体視差（現在は未使用）
