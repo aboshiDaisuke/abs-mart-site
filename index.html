@@ -30,7 +30,7 @@
   <link rel="preload" as="image" type="image/webp" imagesrcset="santa_peace_v2_640.webp 640w, santa_peace_v2_960.webp 960w, santa_peace_v2_full.webp 1254w" imagesizes="(max-width: 452px) calc(100vw - 32px), (max-width: 760px) 420px, 627px" fetchpriority="high" />
   <link rel="preload" as="image" href="abs_mart_logo_toyland.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&amp;family=M+PLUS+Rounded+1c:wght@400;500;700;800&amp;family=Rowdies:wght@700&amp;family=Yomogi&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20261123-news" />
+  <link rel="stylesheet" href="style.css?v=20261123-sukkiri" />
   <link rel="stylesheet" href="toyland.css?v=20261123-readable" />
   <link rel="stylesheet" href="splash.css?v=20261101-splash3" />
   <link rel="modulepreload" href="vendor/three/three.module.min.js" />
@@ -58,6 +58,14 @@
         "@type": "SoftwareApplication",
         "name": "Copipe",
         "url": "https://abs-mart.net/copipe/",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "macOS",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "スッキリ",
+        "url": "https://abs-mart.net/sukkiri/",
         "applicationCategory": "UtilitiesApplication",
         "operatingSystem": "macOS",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" }
@@ -275,6 +283,13 @@
           </div>
           <ol class="news-list">
             <li class="news-item">
+              <a class="news-link" href="sukkiri/">
+                <time datetime="2026-11-23">2026.11.23</time>
+                <span class="news-tag news-tag-macapp">Mac App</span>
+                <span class="news-text">Mac アプリ「スッキリ」を追加。Mac の不要なファイルをまとめてお掃除できます</span>
+              </a>
+            </li>
+            <li class="news-item">
               <a class="news-link" href="#mac-apps">
                 <time datetime="2026-11-23">2026.11.23</time>
                 <span class="news-tag news-tag-macapp">Mac App</span>
@@ -300,13 +315,6 @@
                 <time datetime="2026-11-01">2026.11.01</time>
                 <span class="news-tag news-tag-site">Site</span>
                 <span class="news-text">クリスマス仕様に衣替え。3Dの広場でサンタたちと遊べます</span>
-              </a>
-            </li>
-            <li class="news-item">
-              <a class="news-link" href="https://kami-uranai-github.pages.dev/" target="_blank" rel="noopener noreferrer">
-                <time datetime="2026-10-11">2026.10.11</time>
-                <span class="news-tag news-tag-game">Game</span>
-                <span class="news-text">「KAMI VIBES 神様占い」を追加</span>
               </a>
             </li>
           </ol>
@@ -563,6 +571,22 @@
               <span class="work-cat">Mac App</span>
               <span class="work-title">画像を拡大</span>
               <span class="work-desc">ぼやけた写真やイラストを、AIでくっきり2倍・4倍に♡ まとめてドロップでいっきに拡大</span>
+              <span class="work-open" aria-hidden="true">Install<svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+            </a>
+          </article>
+
+          <article class="work-card work-card-sukkiri" data-reveal data-reveal-delay="240">
+            <a class="work-card-link" href="sukkiri/" aria-label="スッキリのインストール方法を見る">
+              <span class="work-new">NEW!</span>
+              <span class="work-thumb">
+                <img src="work_sukkiri_generated.jpg" alt="ギャルがほうきを手に、Mac の不要なファイルをお掃除するスッキリのイメージビジュアル" width="1100" height="619" loading="lazy" decoding="async" />
+              </span>
+              <span class="work-icon work-icon-sukkiri" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M19 3l-7.5 7.5"/><path d="M11.5 10.5l2 2c.6.6.6 1.6 0 2.2L9 19.2c-.6.6-1.6.6-2.2 0l-2-2c-.6-.6-.6-1.6 0-2.2l4.5-4.5c.6-.6 1.6-.6 2.2 0z"/><path d="M6.5 14.5l3 3M8.5 12.5l3 3"/><path d="M4 5.5l.8 1.7 1.7.8-1.7.8L4 10.5l-.8-1.7-1.7-.8 1.7-.8z"/></svg>
+              </span>
+              <span class="work-cat">Mac App</span>
+              <span class="work-title">スッキリ</span>
+              <span class="work-desc">Macにたまった不要なファイルを見つけて、まとめてお掃除♡ 容量マップで大きいフォルダもひと目でわかる</span>
               <span class="work-open" aria-hidden="true">Install<svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
             </a>
           </article>
