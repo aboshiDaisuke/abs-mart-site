@@ -16,17 +16,17 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 |---|---|---|
 | 01 | KAMI VIBES 神様占い（生年月日と神社で占う無料占い） | https://kami-uranai-github.pages.dev/ |
 | 02 | 鮨図鑑（鮨ネタクイズゲーム） | https://sushi-zukan.pages.dev/ |
-| 03 | 金萬 3D（3Dビューア・非公式ファンメイド） | https://aboshidaisuke.github.io/kinman-3d/ |
+| 03 | 金萬 3D（3Dビューア・非公式ファンメイド） | https://abs-mart.net/kinman-3d/ |
 | 04 | GRO-CHAN SKY BLASTER（シューティングゲーム） | https://grochan-sky-blaster.pages.dev/ |
 | 05 | 夜桜詣（3D散策ゲーム） | https://yozakura.app/ |
 | 06 | SUNSET DRIVE（3Dカートレーシング） | https://sunset-drive.pages.dev/ |
-| 07 | ずんだもん動画制作キット | https://aboshidaisuke.github.io/zundamon-remotion/ |
+| 07 | ずんだもん動画制作キット | https://abs-mart.net/zundamon-remotion/ |
 | 08 | こえくらべ（Gemini TTS 聴きくらべ・非公式） | https://koekurabe-app.web.app/ |
-| 09 | おみやげ配布あみだくじ（抽選） | https://aboshidaisuke.github.io/amidakuji/ |
-| 10 | SRT to FCPXML Editor（字幕変換） | https://aboshidaisuke.github.io/srt-to-fcpxml/ |
-| 11 | Media to MP3 Merger（音声結合） | https://aboshidaisuke.github.io/media-to-mp3-merger/ |
-| 12 | PDF Editor | https://aboshidaisuke.github.io/pdf-editor/ |
-| 13 | 飲み会 予算管理 | https://aboshidaisuke.github.io/BBQ/ |
+| 09 | おみやげ配布あみだくじ（抽選） | https://abs-mart.net/amidakuji/ |
+| 10 | SRT to FCPXML Editor（字幕変換） | https://abs-mart.net/srt-to-fcpxml/ |
+| 11 | Media to MP3 Merger（音声結合） | https://abs-mart.net/media-to-mp3-merger/ |
+| 12 | PDF Editor | https://abs-mart.net/pdf-editor/ |
+| 13 | 飲み会 予算管理 | https://abs-mart.net/BBQ/ |
 
 ## 季節デザイン：Christmas Toyland（2026）
 
@@ -147,7 +147,6 @@ abs_mart_hero_poster.jpg       ヒーロー動画のポスター/フォールバ
 abs_mart_share.jpg             OG/Twitter共有画像
 work_*_generated.jpg           各ツールのビジュアル
 CNAME                          カスタムドメイン（abs-mart.net）
-<ツール名>/index.html           旧URL abs-mart.net/<ツール名>/ → aboshidaisuke.github.io/<ツール名>/ への転送ページ
 DOMAIN_MANAGEMENT.md           ドメイン管理メモ
 _src/                          画像の原本（AI生成ソース・gitignore）
 ```
