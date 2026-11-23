@@ -872,6 +872,13 @@ dd {
   box-shadow: 3px 3px 0 #e8efff;
 }
 
+.work-group-note {
+  margin: -10px 0 18px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
 .work-group-title {
   color: var(--ink);
   font-size: 1.34rem;
@@ -887,6 +894,7 @@ dd {
 
 /* Three across on a 6-track grid; a short last row stays left-aligned */
 .works-grid-tools,
+.works-grid-apps,
 .works-grid-games {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
@@ -1054,6 +1062,16 @@ dd {
   background: #fff4ef;
 }
 
+.work-icon-copipe {
+  color: #7a4fd6;
+  background: #f5f0ff;
+}
+
+.work-icon-upscale {
+  color: #e2620f;
+  background: #fff4ec;
+}
+
 .work-icon-racing {
   color: #e2453a;
   background: #fff5ef;
@@ -1166,6 +1184,14 @@ dd {
 
 .work-card-snapfold .work-open {
   color: #d9481c;
+}
+
+.work-card-copipe .work-open {
+  color: #7a4fd6;
+}
+
+.work-card-upscale .work-open {
+  color: #e2620f;
 }
 
 .work-card-zundamon .work-open {
@@ -1359,6 +1385,7 @@ dd {
   }
 
   .works-grid-tools,
+  .works-grid-apps,
   .works-grid-games {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -1498,6 +1525,7 @@ dd {
   }
 
   .works-grid-tools,
+  .works-grid-apps,
   .works-grid-games,
   .works-grid {
     grid-template-columns: 1fr;
@@ -1505,6 +1533,7 @@ dd {
 
   .works-grid > .work-card,
   .works-grid-tools > .work-card:nth-child(n),
+  .works-grid-apps > .work-card:nth-child(n),
   .works-grid-games > .work-card:nth-child(n) {
     grid-column: auto;
   }
