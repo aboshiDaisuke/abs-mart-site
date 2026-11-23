@@ -247,3 +247,65 @@ body { background: var(--paper); background-image: none; }
   .hero-snow { display: none; }
   .string-lights i::after { animation: none; }
 }
+
+/* Readability pass (Digital Agency design system guide): larger text and 4.5:1 contrast for white-on-red/green labels. Typefaces and weights unchanged. */
+:root { --grad-gal: linear-gradient(120deg, #d3304a, #c4223f); }
+/* White text on red/green surfaces reaches 4.5:1. */
+.nav-link:first-child { background: #c8243f; }
+.work-new { background: #c8243f; }
+.work-group + .work-group .work-group-label { background: #c8243f; }
+.work-group-label { background: #00735d; }
+.holiday-marquee { background: #c8243f; }
+.world-buttons button.is-active { background: #c8243f; }
+/* Text sizes (desktop). */
+.logo-sub { font-size: 10px; }
+.nav-season { font-size: 11px; }
+.nav-link, .nav-link:first-child, .nav-link:nth-child(2) { font-size: 14px; }
+.eyebrow, #works .section-heading .eyebrow { font-size: 12px; }
+.hero-lead { font-size: 15px; }
+.hero-copy .btn { font-size: 15px; }
+.hero-smallprint { font-size: 12px; }
+.santa-bubble { font-size: 14px; }
+.world-heading h2 { font-size: 14px; }
+.world-buttons button { font-size: 13px; }
+.world-message { font-size: 14px; }
+.motion-toggle { font-size: 12px; }
+.news-tag { font-size: 12px; }
+.work-group-label, .work-group + .work-group .work-group-label { font-size: 13px; }
+.work-cat { font-size: 12px; }
+.work-desc { font-size: 15px; }
+.point-no { font-size: 12px; }
+.point-desc { font-size: 15px; }
+.footer-nav a { font-size: 14px; }
+.footer-copy { font-size: 14px; }
+.footer-copy span { font-size: 12px; }
+/* Phones. */
+@media (max-width: 760px) {
+  .nav-link, .nav-link:first-child, .nav-link:nth-child(2) { font-size: 13px; }
+  .hero-copy .eyebrow, #works .section-heading .eyebrow { font-size: 11px; }
+  .hero-lead { font-size: 13px; }
+  .hero-tagline { font-size: 15px; }
+  .hero-copy .btn { font-size: 14px; }
+  .hero-smallprint { font-size: 12px; }
+  .santa-bubble { font-size: 12px; }
+  .world-heading h2 { font-size: 13px; }
+  .world-buttons button { font-size: 11px; white-space: nowrap; gap: 2px; padding-inline: 2px; }
+  .world-buttons button span { font-size: 12px; }
+  #works .section-heading .eyebrow { font-size: 10px; letter-spacing: .04em; }
+  .holiday-marquee { font-size: 11px; }
+  .world-message { font-size: 13px; }
+  .motion-toggle { font-size: 12px; }
+  .work-group-label, .work-group + .work-group .work-group-label { font-size: 12px; }
+  .work-group-title { font-size: 15px; }
+  .work-card .work-title { font-size: 16px; }
+  .work-cat { font-size: 12px; }
+  .work-desc { font-size: 14px; }
+  .work-open { font-size: 13px; }
+  .point-desc { font-size: 14px; }
+}
+@media (max-width: 380px) {
+  .hero-tagline { font-size: 14px; }
+  .hero-copy .eyebrow { font-size: 10px; }
+  .hero-copy .btn { font-size: 14px; }
+  .nav-link, .nav-link:first-child, .nav-link:nth-child(2) { font-size: 12px; }
+}
