@@ -6,7 +6,25 @@ const message = document.querySelector('.world-message');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const connection = navigator.connection;
 
-if (stage) initWorld().catch(showFallback);
+if (stage) splashDone().then(initWorld).catch(showFallback);
+
+// The opening splash runs its own WebGL scene. Build this one only after the splash is gone,
+// so the two never compete for the main thread or the GPU (on phones that caused a visible hitch).
+function splashDone() {
+  const root = document.documentElement;
+  if (!root.classList.contains('splash-on')) return Promise.resolve();
+  return new Promise((resolve) => {
+    const observer = new MutationObserver(() => {
+      if (root.classList.contains('splash-on')) return;
+      observer.disconnect();
+      resolve();
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+  });
+}
+
+// Let the page paint between the heavy setup steps instead of freezing once for a long time.
+const breathe = () => new Promise((resolve) => requestAnimationFrame(() => setTimeout(resolve, 0)));
 
 function showFallback(error) {
   console.warn('Christmas scene unavailable; keeping the static Christmas scene.', error);
@@ -22,6 +40,7 @@ async function initWorld() {
     import('./vendor/three/three.module.min.js'),
     import('./christmas-models.js?v=craft-v2'),
   ]);
+  await breathe();
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
   const renderer = new T.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
@@ -32,7 +51,6 @@ async function initWorld() {
   renderer.toneMappingExposure = 1.15;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = T.PCFSoftShadowMap;
-  stage.append(canvas);
 
   const scene = new T.Scene();
   const camera = new T.OrthographicCamera(-11, 11, 3.5, -3.5, .1, 80);
@@ -48,16 +66,22 @@ async function initWorld() {
   scene.add(key);
   const rim = new T.DirectionalLight(0x94ceff, 1.6); rim.position.set(6, 5, -5); scene.add(rim);
 
+  await breathe();
   const models = createChristmasModels(T);
   scene.add(models.root);
-  scene.environment = models.environment();
+  await breathe();
+  // Prefilter the reflections now rather than inside the first render.
+  const pmrem = new T.PMREMGenerator(renderer);
+  const environmentMap = pmrem.fromEquirectangular(models.environment()).texture;
+  pmrem.dispose();
+  scene.environment = environmentMap;
   scene.environmentIntensity = 1.1;
   const { actors } = models;
   const treeLight = new T.PointLight(0xffd369, 7, 7); treeLight.position.set(.45, 3.8, .4); scene.add(treeLight);
   const raycaster = new T.Raycaster();
   const pointer = new T.Vector2();
   const cameraTarget = new T.Vector2();
-  let inView = true, destroyed = false, contextLost = false;
+  let inView = true, destroyed = false, contextLost = false, ready = false;
   let frame = 0, elapsed = 0, lastTime = 0, narrow = false;
   let activeCharacter = '', effectStarted = -10;
   let giftProgress = 0;
@@ -197,7 +221,7 @@ async function initWorld() {
   }
 
   function render() {
-    if (destroyed || contextLost) return;
+    if (!ready || destroyed || contextLost) return;
     pose(); renderer.render(scene, camera);
   }
   function tick(now) {
@@ -271,6 +295,13 @@ async function initWorld() {
     resize(); stage.querySelector('.world-fallback').hidden = true; stage.dataset.state = 'ready'; updateMotion();
   });
 
+  // Compile the shaders off the main thread where the browser allows it, then draw the first frame.
+  await breathe();
+  if (renderer.compileAsync) await renderer.compileAsync(scene, camera);
+  await breathe();
+  if (destroyed) return;
+  stage.append(canvas);
+  ready = true;
   resize();
   stage.querySelector('.world-fallback').hidden = true;
   controls.hidden = false;
@@ -294,7 +325,7 @@ async function initWorld() {
     for (const geometry of geometries) geometry.dispose();
     for (const material of materials) material.dispose();
     for (const texture of models.textures) texture.dispose();
-    snowTexture.dispose(); glowTexture.dispose(); renderer.dispose();
+    snowTexture.dispose(); glowTexture.dispose(); environmentMap.dispose(); renderer.dispose();
   }
   window.addEventListener('pagehide', dispose);
   window.addEventListener('pageshow', event => { if (event.persisted) updateMotion(); });
