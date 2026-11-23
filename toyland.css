@@ -91,6 +91,7 @@ body { background: var(--paper); background-image: none; }
 .christmas-world { --stage-height: 250px; position: relative; z-index: 5; width: 100%; margin: -8px auto 0; scroll-margin-top: calc(var(--nav-h) + 12px); }
 /* The same snow color continues from the canvas through the controls to the ribbon. */
 .christmas-world::before { content: ""; position: absolute; z-index: -1; top: 55%; bottom: 0; left: calc(50% - 50vw); width: 100vw; border-radius: 50% 50% 0 0 / 30px 30px 0 0; background: #e2f3ee; pointer-events: none; }
+@media (min-width: 761px) { .christmas-world::before { top: var(--snow-bank-top, 55%); } } /* set by christmas-world.js so the bank meets the 3D snow edge */
 .world-heading { position: absolute; top: 8px; right: 8px; z-index: 2; display: flex; align-items: center; justify-content: space-between; width: auto; margin: 0; padding: 0; }
 .world-heading > div { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 .world-kicker { display: none; font-size: 8px; color: #b5dfd8; letter-spacing: .18em; font-weight: 800; }

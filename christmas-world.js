@@ -128,7 +128,27 @@ async function initWorld() {
     Object.assign(camera, { left: -halfWidth, right: halfWidth, top: viewHeight / 2, bottom: -viewHeight / 2 });
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
+    alignSnowBank(width, height);
     render();
+  }
+
+  // The CSS snow bank continues the 3D snow past the stage edges. Put its curve exactly where the 3D horizon meets the edge.
+  function alignSnowBank(width, height) {
+    const world = stage.closest('.christmas-world');
+    const ground = scene.getObjectByName('continuous-snow');
+    if (!world || !ground) return;
+    scene.updateMatrixWorld();
+    const sx = camera.right / ground.getWorldScale(new T.Vector3()).x;
+    const ax = Math.abs(sx);
+    let sy;
+    if (ax <= 10) { const t = (ax + 10) / 20; sy = (1 - t) ** 2 * 2.2 + 2 * t * (1 - t) * 4 + t * t * 2.2; }
+    else if (ax <= 18) { const t = (-1 + Math.sqrt(19 - ax)) / 2; sy = (1 - t) ** 2 * -1.8 + 2 * t * (1 - t) * 1.2 + t * t * 2.2; }
+    else { world.style.removeProperty('--snow-bank-top'); return; }
+    const p = new T.Vector3(ax, 0, -sy).applyMatrix4(ground.matrixWorld).project(camera);
+    const edgeY = stage.offsetTop + (1 - p.y) / 2 * height;
+    const k = Math.min(1, width / window.innerWidth);
+    const radius = 30; // matches the bank's 30px vertical corner radius in CSS
+    world.style.setProperty('--snow-bank-top', `${edgeY - radius * (1 - Math.sqrt(1 - k * k))}px`);
   }
 
   function pose() {
