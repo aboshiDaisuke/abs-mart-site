@@ -797,6 +797,31 @@ dd {
   line-height: 1.75;
 }
 
+/* ---------- News ---------- */
+.news { margin: 0 0 32px; }
+.news-label { margin: 0; color: var(--pink-hot); font: 700 12px var(--font-display); letter-spacing: .12em; }
+.news-title { margin: 0; color: var(--ink); font-size: 1.1rem; font-weight: 800; }
+.news-list { margin: 0; padding: 0; list-style: none; }
+.news-link { display: flex; align-items: baseline; gap: 12px; color: var(--text); text-decoration: none; }
+.news-link time { flex: none; color: var(--muted); font-size: .86rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.news-tag { flex: none; min-width: 74px; padding: 1px 10px; border-radius: 999px; background: var(--pink-soft); color: var(--pink-hot); font-size: .74rem; font-weight: 800; text-align: center; }
+.news-tag-macapp { background: #e6f4ff; color: #1f63b5; }
+.news-tag-tool { background: #fff1dd; color: #a35a00; }
+.news-tag-game { background: #f1e9ff; color: #6a3fc4; }
+.news-text { font-size: .95rem; font-weight: 500; }
+.news-link:hover .news-text, .news-link:focus-visible .news-text { text-decoration: underline; text-underline-offset: 3px; }
+
+.news { padding: 20px 24px; border-radius: 16px; background: var(--surface); box-shadow: 0 8px 20px rgba(22, 59, 57, .08); }
+.news .news-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+.news .news-item + .news-item { border-top: 1px dashed rgba(22, 59, 57, .16); }
+.news .news-link { padding: 10px 0; }
+
+@media (max-width: 720px) {
+  .news { padding: 16px 16px; }
+  .news-link { flex-wrap: wrap; gap: 4px 10px; }
+  .news-text { flex-basis: 100%; font-size: .9rem; }
+}
+
 /* ---------- Works ---------- */
 #works {
   padding: 52px 0 48px;

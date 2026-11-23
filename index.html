@@ -30,7 +30,7 @@
   <link rel="preload" as="image" type="image/webp" imagesrcset="santa_peace_640.webp 640w, santa_peace_960.webp 960w, santa_peace_full.webp 1254w" imagesizes="(max-width: 452px) calc(100vw - 32px), (max-width: 760px) 420px, 627px" fetchpriority="high" />
   <link rel="preload" as="image" href="abs_mart_logo_toyland.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&amp;family=M+PLUS+Rounded+1c:wght@400;500;700;800&amp;family=Rowdies:wght@700&amp;family=Yomogi&amp;display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css?v=20261123-macapps" />
+  <link rel="stylesheet" href="style.css?v=20261123-news" />
   <link rel="stylesheet" href="toyland.css?v=20261101-mobile-footer2" />
   <link rel="stylesheet" href="splash.css?v=20261101-splash3" />
   <link rel="modulepreload" href="vendor/three/three.module.min.js" />
@@ -268,6 +268,50 @@
           <h2 class="section-title">どれから開ける？<br class="title-break" />遊びのプレゼント。</h2>
         </div>
 
+        <section class="news" aria-labelledby="news-title" data-reveal>
+          <div class="news-head">
+            <p class="news-label" lang="en">NEWS</p>
+            <h3 class="news-title" id="news-title">更新情報</h3>
+          </div>
+          <ol class="news-list">
+            <li class="news-item">
+              <a class="news-link" href="#mac-apps">
+                <time datetime="2026-11-23">2026.11.23</time>
+                <span class="news-tag news-tag-macapp">Mac App</span>
+                <span class="news-text">Mac アプリ「Copipe」と「画像を拡大」を追加。Mac Apps の欄ができました</span>
+              </a>
+            </li>
+            <li class="news-item">
+              <a class="news-link" href="snapfold/">
+                <time datetime="2026-11-23">2026.11.23</time>
+                <span class="news-tag news-tag-macapp">Mac App</span>
+                <span class="news-text">Mac アプリ「Snapfold」を追加</span>
+              </a>
+            </li>
+            <li class="news-item">
+              <a class="news-link" href="https://aboshidaisuke.github.io/media-to-mp3-merger/" target="_blank" rel="noopener noreferrer">
+                <time datetime="2026-11-23">2026.11.23</time>
+                <span class="news-tag news-tag-tool">Tool</span>
+                <span class="news-text">「ぽいっとMP3」にリニューアル。声とBGMの分離・雑音消し・チャプター一覧ができるように</span>
+              </a>
+            </li>
+            <li class="news-item">
+              <a class="news-link" href="#christmas-world">
+                <time datetime="2026-11-01">2026.11.01</time>
+                <span class="news-tag news-tag-site">Site</span>
+                <span class="news-text">クリスマス仕様に衣替え。3Dの広場でサンタたちと遊べます</span>
+              </a>
+            </li>
+            <li class="news-item">
+              <a class="news-link" href="https://kami-uranai-github.pages.dev/" target="_blank" rel="noopener noreferrer">
+                <time datetime="2026-10-11">2026.10.11</time>
+                <span class="news-tag news-tag-game">Game</span>
+                <span class="news-text">「KAMI VIBES 神様占い」を追加</span>
+              </a>
+            </li>
+          </ol>
+        </section>
+
         <div class="work-group">
           <div class="work-group-heading" data-reveal>
             <p class="work-group-label" lang="en">Games &amp; Fun</p>
@@ -466,7 +510,7 @@
           </div>
         </div>
 
-        <div class="work-group">
+        <div class="work-group" id="mac-apps">
 
           <div class="work-group-heading" data-reveal>
             <p class="work-group-label" lang="en">Mac Apps</p>
