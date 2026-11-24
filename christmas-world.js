@@ -161,7 +161,7 @@ async function initWorld() {
     const world = stage.closest('.christmas-world');
     const ground = scene.getObjectByName('continuous-snow');
     if (!world || !ground) return;
-    scene.updateMatrixWorld();
+    scene.updateMatrixWorld(); camera.updateMatrixWorld(); // the camera is not in the scene; before the first render its lookAt is not in matrixWorldInverse yet
     const sx = camera.right / ground.getWorldScale(new T.Vector3()).x;
     const ax = Math.abs(sx);
     let sy;
