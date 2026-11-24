@@ -68,6 +68,7 @@ async function initWorld() {
 
   await breathe();
   const models = createChristmasModels(T);
+  const snowfield = models.root.getObjectByName('snowfield');
   scene.add(models.root);
   await breathe();
   // Prefilter the reflections now rather than inside the first render.
@@ -218,6 +219,8 @@ async function initWorld() {
     snow.visible = animation;
     snowGeometry.attributes.position.needsUpdate = true;
     models.root.rotation.y = animation ? T.MathUtils.lerp(models.root.rotation.y, cameraTarget.x * .06, .035) : 0;
+    // Only the characters sway with the mouse; the snow stays put so it keeps meeting the CSS snow bank.
+    snowfield.rotation.y = -models.root.rotation.y;
   }
 
   function render() {
