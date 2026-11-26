@@ -55,7 +55,7 @@ HTML / CSS / 最小限の JavaScript のみで構成し、フレームワーク�
 
 組み込みの imagegen ツールで、既存キャラクターを参照したアニメ塗りの透過イラストを制作しました。
 
-- 現行のピース姿：`santa_peace_v2_full.webp`（1254×1254px・透過・可逆圧縮）と `santa_peace_v2_640.webp` / `santa_peace_v2_960.webp`。原本：`_src/christmas/santa_peace_v5.png`（git管理対象外）。前のピース姿は帽子のてっぺん・左の袖・右肩のファーが画像の端で切れていたため、同じ絵のまま周りに余白を足して描き直しました（2026-11-23）。
+- 現行のピース姿：`santa_peace_v2_full.webp`（1254×1254px・透過・WebP 品質92。2026-11-27 に可逆 1.6MB から軽量化）と `santa_peace_v2_640.webp` / `santa_peace_v2_960.webp`。原本：`_src/christmas/santa_peace_v5.png`（git管理対象外）。前のピース姿は帽子のてっぺん・左の袖・右肩のファーが画像の端で切れていたため、同じ絵のまま周りに余白を足して描き直しました（2026-11-23）。
 - 前のピース姿：`santa_peace_full.webp` / `santa_peace_640.webp` / `santa_peace_960.webp` を保存。原本：`_src/christmas/santa_peace_v4.png`（git管理対象外）。
 - 前のバストアップ：`santa_bust_full.webp` / `santa_bust_640.webp` / `santa_bust_960.webp` を保存。原本：`_src/christmas/santa_bust_v2.png`（git管理対象外）。今回の顔・髪・衣装の参照元です。
 - 不採用の手の重ね合わせ案：`santa_peace_hand_full.webp` / `santa_peace_hand_640.webp`。原本：`_src/christmas/santa_peace_hand.png`（git管理対象外）。元絵の下がった腕とつながらず不自然だったため、ページから手の表示と位置調整処理を撤去しました。素材は履歴用に保存し、現行ページでは読み込みません。
