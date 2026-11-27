@@ -43,6 +43,12 @@ CloudflareのDNS管理画面で以下を設定済み：
 
 ⚠️ **プロキシは絶対にONにしない**（GitHub PagesのSSL証明書が壊れる）
 
+### www.abs-mart.net（2026-11-28〜）
+
+- GitHub Pages が www の証明書を出さなかったため、www は Cloudflare Worker `abs-mart-www-redirect`（`_workers/www-redirect/`）の Custom Domain にした。どのパスも `https://abs-mart.net/<同じパス>` へ 301 転送する
+- DNS の www レコードは Worker が自動で管理する（一覧で鍵マーク・「Worker」と出る）。手で編集・削除しない
+- Worker を直したら `_workers/www-redirect/` で `wrangler deploy`
+
 ---
 
 ### 📅 期限管理
